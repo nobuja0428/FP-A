@@ -1,0 +1,668 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="FP&A問題集">
+<meta name="theme-color" content="#f5efe3">
+<title>FP&A検定 4択問題集</title>
+<style>
+:root{
+  --bg:#f5efe3;--card:#fffaf0;--card2:#fff4dc;--ink:#2b241c;--muted:#706454;
+  --line:#dfcfb6;--main:#2c241b;--accent:#b7791f;--ok:#15803d;--ng:#b91c1c;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Sans","Yu Gothic","Noto Sans JP",sans-serif;font-size:16px;padding-bottom:92px}
+button,select,input{font:inherit}
+button{cursor:pointer}
+header{position:sticky;top:0;z-index:10;background:linear-gradient(180deg,#fffaf0,#f1e3ce);border-bottom:1px solid var(--line);padding:calc(12px + env(safe-area-inset-top)) 14px 12px;box-shadow:0 4px 14px rgba(44,36,27,.08)}
+.top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+h1{font-size:21px;margin:0;color:var(--main);line-height:1.15}
+.sub{font-size:12px;color:var(--muted);margin-top:4px}
+.pills{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
+.pill{border:1px solid var(--line);background:#fffaf0;border-radius:999px;padding:7px 9px;font-size:12px;white-space:nowrap}
+.pill b{font-size:14px}
+main{max-width:900px;margin:0 auto;padding:14px}
+.screen{display:none}
+.screen.on{display:block}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;overflow:hidden;box-shadow:0 8px 22px rgba(44,36,27,.08)}
+.pad{padding:15px}
+.title{font-size:18px;font-weight:900;margin:0 0 8px}
+.text{font-size:13px;color:var(--muted);line-height:1.65}
+.grid{display:grid;gap:10px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.subject{width:100%;text-align:left;border:1px solid var(--line);background:linear-gradient(180deg,#fffdf7,#fff4dc);border-radius:18px;padding:16px;display:grid;grid-template-columns:1fr auto;gap:10px;align-items:center}
+.subject-name{font-size:24px;font-weight:900}
+.subject-desc{font-size:13px;color:var(--muted);margin-top:5px}
+.arrow{font-size:30px;color:var(--accent)}
+.stat{background:#fff4dc;border:1px solid #ead9bf;border-radius:14px;padding:11px}
+.stat b{display:block;font-size:22px;line-height:1.1}
+.stat span{font-size:12px;color:var(--muted)}
+.progress{height:9px;background:#ead9bf;border-radius:999px;overflow:hidden;margin-top:10px}
+.progress i{display:block;height:100%;background:linear-gradient(90deg,#b7791f,#15803d);width:0%}
+.head{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--card2);border-bottom:1px solid var(--line);padding:13px 15px}
+.back{border:0;background:transparent;font-weight:900;color:var(--main);padding:5px 0}
+.btn{border:1px solid var(--line);background:#fffaf0;color:var(--main);border-radius:14px;padding:12px 13px;min-height:46px;font-weight:900}
+.btn.primary{background:var(--main);color:#fff;border-color:var(--main)}
+.btn.accent{background:var(--accent);color:#fff;border-color:var(--accent)}
+.btn.danger{background:#fff1f2;color:#9f1239;border-color:#fecdd3}
+.btn:disabled{opacity:.55;cursor:not-allowed}
+.check-row{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:start;border-bottom:1px dashed #ead9bf;padding:11px 0}
+.check-row:last-child{border-bottom:0}
+.check-row input{width:20px;height:20px;margin-top:2px}
+.badge{font-size:12px;color:var(--muted);border:1px solid #ead9bf;background:#fff9ed;border-radius:999px;padding:5px 8px;white-space:nowrap}
+.option{border-top:1px solid var(--line);margin-top:12px;padding-top:12px}
+.option h3{font-size:16px;margin:0 0 8px}
+.segment{display:grid;gap:8px}
+.segment.two{grid-template-columns:1fr 1fr}
+.segment.four{grid-template-columns:repeat(4,1fr)}
+.seg{border:1px solid var(--line);background:#fffaf0;border-radius:999px;padding:10px 7px;font-size:13px;font-weight:900}
+.seg.on{background:var(--main);color:#fff;border-color:var(--main)}
+select{width:100%;border:1px solid var(--line);background:#fffaf0;border-radius:14px;padding:12px;min-height:46px}
+.quiz-top{display:flex;justify-content:space-between;gap:8px;align-items:center;background:var(--card2);border-bottom:1px solid var(--line);padding:12px 15px}
+.quiz-count{font-weight:900}
+.checkbtn{border:1px solid var(--line);background:#fffaf0;border-radius:999px;padding:8px 11px;font-weight:900;color:#8a5a14}
+.tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.tag{font-size:12px;font-weight:900;border-radius:999px;padding:6px 8px;background:#f0e1c9;color:#5d442c}
+.tag.dark{background:var(--main);color:#fff}
+.question{font-size:19px;font-weight:900;line-height:1.75;white-space:pre-wrap;margin:8px 0 14px}
+.choice{width:100%;text-align:left;border:1.5px solid var(--line);background:#fffaf0;border-radius:15px;margin:8px 0;padding:13px;display:flex;gap:11px;line-height:1.55;min-height:54px;color:var(--ink)}
+.key{flex:0 0 30px;width:30px;height:30px;border-radius:999px;background:#ead9bf;display:flex;align-items:center;justify-content:center;font-weight:900}
+.choice.correct{border-color:#86efac;background:#f0fdf4}
+.choice.correct .key{background:#dcfce7;color:#166534}
+.choice.wrong{border-color:#fca5a5;background:#fff1f2}
+.choice.wrong .key{background:#fee2e2;color:#991b1b}
+.choice:disabled{opacity:1;color:var(--ink)}
+.answer{display:none;border:1px solid var(--line);background:#fff6e6;border-radius:16px;margin-top:12px;padding:14px;line-height:1.75}
+.answer.show{display:block}
+.answer h3{font-size:20px;margin:0 0 6px}
+.answer h3.ok{color:var(--ok)}
+.answer h3.ng{color:var(--ng)}
+.small{font-size:12px;color:var(--muted)}
+.bottom{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(245,239,227,.94);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:9px 12px calc(9px + env(safe-area-inset-bottom));display:none}
+.bottom-inner{max-width:900px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr 1.4fr;gap:8px}
+.score{text-align:center;padding:20px 10px}
+.circle{width:150px;height:150px;border-radius:50%;border:10px solid #ead9bf;background:#fff4dc;margin:12px auto;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.circle b{font-size:40px;line-height:1}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;max-width:420px;margin:14px auto}
+.result-stats div{background:#fff4dc;border:1px solid var(--line);border-radius:14px;padding:12px;text-align:center}
+.result-stats b{display:block;font-size:22px}
+.search{width:100%;border:1px solid var(--line);background:#fffaf0;border-radius:14px;padding:12px;min-height:46px}
+.list-item{display:grid;grid-template-columns:12px 1fr auto;gap:10px;align-items:center;border-top:1px solid #ead9bf;padding:12px 15px;cursor:pointer}
+.dot{width:11px;height:11px;border-radius:50%;background:#d6c4a7}
+.dot.ok{background:var(--ok)}.dot.ng{background:var(--ng)}.dot.ck{background:var(--accent)}
+details{border:1px solid var(--line);background:#fffaf0;border-radius:14px;overflow:hidden}
+summary{padding:12px 14px;font-weight:900}
+.toast{position:fixed;left:50%;bottom:94px;transform:translateX(-50%);z-index:40;background:rgba(44,36,27,.94);color:#fff;border-radius:999px;padding:10px 14px;font-size:13px;opacity:0;pointer-events:none;transition:.18s;white-space:nowrap}
+.toast.show{opacity:1}
+.error{background:#fff1f2;border:1px solid #fecdd3;color:#9f1239;border-radius:14px;padding:12px;line-height:1.6}
+@media(min-width:760px){
+  .layout{display:grid;grid-template-columns:330px 1fr;gap:16px;align-items:start}
+  .sticky{position:sticky;top:125px}
+  main{padding:20px}
+}
+@media(max-width:420px){
+  h1{font-size:19px}.pill{font-size:11px;padding:6px 8px}.question{font-size:18px}
+  .segment.four{grid-template-columns:repeat(2,1fr)}.btn{font-size:14px;padding:11px 8px}
+  .bottom-inner{grid-template-columns:1fr 1fr 1.2fr}
+}
+</style>
+</head>
+<body>
+<script id="app-data" type="application/json">{"questions": [{"id": "ch1_001", "no": 1, "chapter": "第1章 FP&Aとは", "topic": "FP&Aの役割", "question": "効果的なFP&Aの12の原則では、原則4で予算と実績および予算と予測の差異発生理由を、ある面から明確にすることが示されている。ある面とは、次のうちどれか。", "choices": [{"key": "a", "text": "タスク・コントロールの面"}, {"key": "b", "text": "サプライチェーンの面"}, {"key": "c", "text": "価格の面"}, {"key": "d", "text": "ビジネスの面"}], "answer": "d", "explanation": "差異を単に金額の有利・不利で見るだけでは不十分であり、計画や戦略に照らしてビジネス上どのような状態かを把握することが重要である。"}, {"id": "ch1_002", "no": 2, "chapter": "第1章 FP&Aとは", "topic": "FP&Aの役割", "question": "効果的なFP&Aの12の原則では、原則7で責任会計の徹底を図ると共に結びつけるべき要素が挙げられている。その要素は、次のうちどれか。", "choices": [{"key": "a", "text": "金銭的報酬"}, {"key": "b", "text": "業務上の目標"}, {"key": "c", "text": "非金銭的報酬"}, {"key": "d", "text": "経営者との連携"}], "answer": "a", "explanation": "責任会計では、各部門が適切に責任を果たすことが求められる。その達成を金銭的報酬と結びつけることで、マネジメント・コントロール・システムを機能させる。"}, {"id": "ch1_003", "no": 3, "chapter": "第1章 FP&Aとは", "topic": "FP&Aの役割", "question": "効果的なFP&Aの12の原則では、原則9で事業の成功をもたらすために明確にすべき項目が示されている。その項目は、次のうちどれか。", "choices": [{"key": "a", "text": "非財務指標"}, {"key": "b", "text": "バリュードライバー"}, {"key": "c", "text": "財務目標"}, {"key": "d", "text": "付加価値活動"}], "answer": "b", "explanation": "事業の成功につながる要因であるバリュードライバーを明確にし、それに関連するKPIを設定することが重要である。"}, {"id": "ch1_004", "no": 4, "chapter": "第1章 FP&Aとは", "topic": "FP&Aの役割", "question": "FP&Aの重要な役割に「真のビジネス・パートナー」がある。この役割の背景にあるもう1つの役割として、適切なものはどれか。", "choices": [{"key": "a", "text": "企業の資産を守る"}, {"key": "b", "text": "企業価値を上げる"}, {"key": "c", "text": "ESGに取り組む"}, {"key": "d", "text": "マネジメント・コントロール・システムを設計し、運営する"}], "answer": "d", "explanation": "FP&A組織は、コントローラー組織から発展した背景を持つ。真のビジネス・パートナーとしての役割の背景には、マネジメント・コントロール・システムの設計・運営がある。"}, {"id": "ch1_005", "no": 5, "chapter": "第1章 FP&Aとは", "topic": "FP&Aの役割", "question": "効果的なFP&Aの12の原則では、原則1で戦略実行のために必要なプロジェクトを明確にするツールの作成を示している。そのツールはどれか。", "choices": [{"key": "a", "text": "戦略計画"}, {"key": "b", "text": "予算"}, {"key": "c", "text": "予測"}, {"key": "d", "text": "差異分析"}], "answer": "a", "explanation": "戦略計画は、組織の基本戦略を具体化し、何を実行して実現するかを示す計画である。予算や統制の基礎にもなる。"}, {"id": "ch1_006", "no": 6, "chapter": "第1章 FP&Aとは", "topic": "ビジネス・パートナー", "question": "FP&Aプロフェッショナルが事業部門において計画や分析を提供する場合に、事業部門のニーズを理解し付加価値を加えていることを最も良く示すのは、以下のどれか。", "choices": [{"key": "a", "text": "SMARTな業務活動の目標を、事業部門のために定義する"}, {"key": "b", "text": "最終成果物を企業の戦略に紐づける"}, {"key": "c", "text": "事業部門と企業全体の両方に強い関連性のあることに、最終成果物を紐づける"}, {"key": "d", "text": "最終成果物を事業部門の業務計画に紐づける"}], "answer": "d", "explanation": "事業部門のニーズを理解して付加価値を出していることを示すには、作成した成果物が事業部門の業務計画と直接結びついていることが重要である。"}, {"id": "ch2_007", "no": 7, "chapter": "第2章 戦略、組織及び業界", "topic": "4 目標管理 / 4.2 バランスト・スコアカード", "question": "バランスト・スコアカードで重要となるのは成果指標の設定と、成果指標\nの達成に繋がるプログラムと数値目標の設定である。プログラムに関連す\nる数値目標として、適切なものはどれか。", "choices": [{"key": "a", "text": "遅行指標"}, {"key": "b", "text": "先行指標"}, {"key": "c", "text": "主要指標"}, {"key": "d", "text": "予測指標"}], "answer": "b", "explanation": "4 目標管理\n4.2 バランスト・スコアカード\n正解: b\nバランスト・スコアカードは成果指標と先行指標の組み合わせによって、初めて効\n果を発揮する。成果指標と先行指標の組み合わせは目的と手段の関係とも言われ、因\n果関係とも称される。\n呼び方は場面によって様々であるが、常に成果ないし結果の指標\n(遅行指標)とそ\nれに結びつく先行指標をセットすることがポイントである。また、先行指標に関して\nは合わせて実施項目(プログラム)を持つことが必要であり、成果を出すために具体\n的にどのような実施項目を実施してカウントするかまでを決めておくことで、成果に\n至る具体的な道筋を明確にでき、組織全体で共有することができる。\nしたがって、正解は(b)となる"}, {"id": "ch2_008", "no": 8, "chapter": "第2章 戦略、組織及び業界", "topic": "4 目標管理 / 4.2 バランスト・スコアカード", "question": "バランスト・スコアカードでは各視点の間が繋がり、各視点の中でも目標\nとパフォーマンス・ドライバーが運動する必要がある。バランスト・スコ\nアカードにおけるそれらの繋がりや連動の説明として、正しいものはどれか。", "choices": [{"key": "a", "text": "擬似関係"}, {"key": "b", "text": "重層関係"}, {"key": "c", "text": "単一関係"}, {"key": "d", "text": "因果関係"}], "answer": "d", "explanation": "。\n4 目標管理\n4.2 バランスト・スコアカード\n正解: d\nバランスト・スコアカードでは視点間と視点内での因果関係の設定が重要であり、\n複数の視点を持つ。典型は財務、顧客、業務プロセス、学習と成長の各視点である\nが、それらの視点は例えば学習と成長から始まつて業務プロセス、顧客、財務へと繋\nげて1つのストーリーとなり、視点間を繋ぐストーリーは因果関係として記される。\n他方、各視点の中でも成果ないし成果指標(遅行指標)とパフォーマンス・ドライ\nバー(先行指標)との間も因果関係とされ、この視点内の因果関係は目的と手段の関\n係を指している。\nつまり、バランスト・スコアカードは複数の視点を持ち、視点内で複数の指標を持\nつことで、戦略の実現を多元的に管理するもので、その鍵概念として用いられるのが\n因果関係である。\nしたがって、正解は(d)となる"}, {"id": "ch2_009", "no": 9, "chapter": "第2章 戦略、組織及び業界", "topic": "4 目標管理 / 4.4 主要業績指標(KPI)", "question": "バランスト・スコアカードやKPIの設定にあっては、SMAR丁であることが\n必要とされる。SMAR下のうち、Aは何の頭文字か。", "choices": [{"key": "a", "text": "Assignment(割り当て)"}, {"key": "b", "text": "Achievable(達成できる)"}, {"key": "c", "text": "Accept(受け取る)"}, {"key": "d", "text": "AtaChment G又り付け)"}], "answer": "b", "explanation": "4 目標管理\n4.4 主要業績指標(KPI)\n正解:b\nバランスト・スコアカードは複数の視点と複数の指標の組み合わせによって作成さ\nれ、設定の仕方にもよるが、目標管理で取り扱う指標が多くなる。\nその際に注意しなければならないのは指標過多であり、戦略実行の本質を見失うこ\nとであるが、それを避けるために設定にあたって原則となる考え方を把握しておくこ\nとが必要となる。業績指標の設定にあって原則とされる考え方であるSMAR丁は\nSpecific、 Measurable、 Acheivable、 Relevant、 丁irne― bounded`[)頭文字を取つ,た\nものである。\nしたがって、正解は(b)となる"}, {"id": "ch2_010", "no": 10, "chapter": "第2章 戦略、組織及び業界", "topic": "5 業界分析 / 5.2 G「owth Share Matrix", "question": "BCGの「市場成長率と市場シェアのマトリックス」において、市場シェア\nが高いことの定義として、適切なものはどれか。", "choices": [{"key": "a", "text": "市場シェアが業界で最も大きい"}, {"key": "b", "text": "市場シェアが30%を上回つている"}, {"key": "c", "text": "市場シェアが上位2社に入つている"}, {"key": "d", "text": "相対的市場シェアが1.0(もしくは1.5)を上回つている"}], "answer": "d", "explanation": "。\n5 業界分析\n5.2 G「owth Share Matrix\n正解: d\nBCGの「市場成長率と市場シェアのマトリックス」は、自社の事業ポートフォリオ\nを「市場成長率」と「相対的市場シェア」の2軸で分析するツールである。「市場成\n長率」は「業界の魅力度」、「相対的市場シェア」は「事業部の競争力」の指標であ\nる。「相対的市場シェア」の軸の高低は、第1位である自社の市場シェアが第2位の\n競合企業のシェアの1.0倍\n(もしくは1.5倍)のシェアに対する高低で表示される。\nしたがって、正解は(d)となる"}, {"id": "ch2_011", "no": 11, "chapter": "第2章 戦略、組織及び業界", "topic": "5 業界分析 / 5.4 SWO丁分析", "question": "自社は売上高を毎年12%ずつ成長させており、売上目標の10%成長を上回\nつてきた。自社の属する業界の成長率が14%である場合の見方として、適\n切なものはどれか。", "choices": [{"key": "a", "text": "自社は売上成長を実現しており、どの点から見ても成功している"}, {"key": "b", "text": "自社は資本コストを上回る収益を上げていない"}, {"key": "c", "text": "自社は市場シェアを減らしている"}, {"key": "d", "text": "自社の株価は上昇する可能性が高い"}], "answer": "c", "explanation": "5 業界分析\n5.4 SWO丁分析\n正解:c\n脱予算経営のメッセージは、成果運動型報酬制度を「固定業績契約」から「相対的\n改善契約」に変えることである。固定業績契約において上司と部下は年度予算上の業\n績目標を達成することを合意する。相対的改善契約において部下の報酬の決定は、固\n定された業績目標の達成度合いではなく、業績の相対的改善を示すベンチマーク\n(例\nえば、市場シェアの上昇)で行う。\nしたがって、正解は(c)である"}, {"id": "ch2_012", "no": 12, "chapter": "第2章 戦略、組織及び業界", "topic": "5 業界分析 / 5.フ 」薦‐", "question": "ポーターの「業界構造の5つの力」モデルにおいて、5つの力に含まれて\nいないのは、次のうちどれか。", "choices": [{"key": "a", "text": "競争の程度 (Rivalry among Existing Competitors)"}, {"key": "b", "text": "新規参入の脅威(Threat of EntW)"}, {"key": "c", "text": "補完品(Complements)の存在"}, {"key": "d", "text": "代替品の脅威 (Threat of Substitution)"}], "answer": "c", "explanation": "。\n5 業界分析\n5.フ 」薦‐\n5早オ青)宣σ)5 Fo「ces\n正解 i c\nマイケル・ポーターの「業界構造の5つの力」モデル(Porter[s Five Forces\nModel)は、業界の魅力度および業界の全体の収益率を5つの力によって分析する。\n5つの力には、競合の程度(Rivalry among Existing Competitors)、\n売り手の交\n渉力(Bargaining Power of Supp‖\ners)、\n買い手の交渉力(Bargaining Power of\nBuyers)、\n代替品の脅威\n(丁h「eat of Substitution)、\n新規参入の脅威\n(丁hreat of\nEnt「y)が含まれる。含まれていないのは、補完品(Complements)の存在である。\nしたがって、正解は(c)となる"}, {"id": "ch2_013", "no": 13, "chapter": "第2章 戦略、組織及び業界", "topic": "5 / 5.9 製品ライフサイクル", "question": "ペット用の高級食料品業界では、少数の競争業者が一般のペット用食料品\nと差別化し、ペット用高級食料品の価値を顧客に理解していただくことに\n集中している。本業界が位置する製品ライフサイクルのフェーズとして、\n適切なものどれか。", "choices": [{"key": "a", "text": "導入期 (Introduction)"}, {"key": "b", "text": "成長期 (G「owth)"}, {"key": "c", "text": "成熟期 (Maturity)"}, {"key": "d", "text": ":妻1退其月(Dec‖ ne)"}], "answer": "a", "explanation": "5 \n業界分析\n5.9 製品ライフサイクル\n正解: a\n企業の競争戦略を開発するために、業界における製品サイクルの分析が行われる。\n製品サイクルには、導入期(Introduction)、\n成長期(Growth)、\n成熟期\n(Maturity)、\n衰退期\n(Dec‖ ne)の4つの期がある。本業界では競争業者がペット\n用高級食料品の価値を顧客に理解していただくことに集中している。「イノベーシ∃\nンを起こし、ブランドを築く能力」が企業の成功要因になる製品ライフサイクルの\nフェーズは、導入期である。\nしたがって、正解は(a)となる"}, {"id": "ch2_014", "no": 14, "chapter": "第2章 戦略、組織及び業界", "topic": "5", "question": "製品ライフサイクルの4段階において、「需要に合わせて生産能力を調整\nし、製品ラインを最適化する能力」が成功要因となるフェーズとして、適\n切なものはどれか。", "choices": [{"key": "a", "text": "衰i塾其月(Dec‖ ne)"}, {"key": "b", "text": "成長期(Growth)"}, {"key": "c", "text": "導入期 (Introduction)"}, {"key": "d", "text": "成熟期 (Maturity)"}], "answer": "a", "explanation": "。\n5 \n業界分析\n5,9 製品ライフサイクル\n正解\nn\n企業の競争戦略を開発するために、業界における製品サイクルの分析が行われる。\n製品サイクルには、導入期、成長期、成熟期、衰退期の4つの期がある。導入期は\n製品が市場に導入される時期である。成長期は製品に対する需要が急激に増加する時\n期である。成熟期は市場が飽和し、需要の多くが更新目的になる時期である。「需要\nに合わせて生産能力を調整し、製品ラインを最適化する能力」が成功要因となるの\nは、衰退期である。\nしたがって、正解は(a)となる"}, {"id": "ch2_015", "no": 15, "chapter": "第2章 戦略、組織及び業界", "topic": "7 競合分析 / 7.7 戦略の定義", "question": "組織の戦略が明確に定義されていることの、経営管理もしくはガバナンス\nに対する効果として、適切なものはどれか。", "choices": [{"key": "a", "text": "経営陣が安全優先に陥つてしまい、現行の戦略に合致しない機会には 一切手を出さない"}, {"key": "b", "text": "経営陣のリスク選好度(Risk Appetite)が増加する"}, {"key": "c", "text": "経営の有効性が上がる"}, {"key": "d", "text": "戦略と経営意思決定の間にある相反がより明確になる"}], "answer": "d", "explanation": "7 競合分析\n7.7 戦略の定義\n正解: d\nロバート・サイモンズは、4つのコントロール・レバーというフレームワークにお\nいて、意図された戦略をトップダウンで下位目標に結びつけて計画通りに実行するた\nめのコントロールシステムを「診断型コントロールシステム」と名づけている。組織\nの戦略が明確に定義されていることによる経営管理もしくはガバナンスに対する効果\nは、「診断型コントロールシステム」によって戦略と経営意思決定の間にある相反が\nより明確になることである。\nしたがって、正解は(d)となる"}, {"id": "ch2_016", "no": 16, "chapter": "第2章 戦略、組織及び業界", "topic": "7", "question": "ミンツパーグの戦略の定義において、「第一線の管理者が変化する状況\nや機会に応じて、意図された戦略を適応させる方法」として、正しいも\nのはどれか。", "choices": [{"key": "a", "text": "意図された戦略"}, {"key": "b", "text": "計画的戦略"}, {"key": "c", "text": "実現された戦略"}, {"key": "d", "text": "創発的戦略"}], "answer": "d", "explanation": "。\n7 \n競合分析\nフ.7 戦略の定義\n正解: d\nヘンリー・ミンツバーグは、戦略には「意図された戦略」と「創発的戦略」の2つ\nがあるとする。「意図された戦略」は実現に向けて「計画された戦略」となる。「創\n発的戦略」は最初からトップが明確に意図したものではなく、第一線の管理者が変化\nする状況や機会に応じて意図された戦略を適応させたものである。「第一線の管理者\nが変化する状況や機会に応じて、意図された戦略を適応させる方法」は創発的戦略で\nある。\nしたがって、正解は(d)となる"}, {"id": "ch2_017", "no": 17, "chapter": "第2章 戦略、組織及び業界", "topic": "", "question": "D技術大学は、これからの5年間の戦略計画を作成するプロセスを開始\nした。大学はビジョン・ミーティングを設定し、主要なリーダーや利害\n関係者に組織のミッション、価値観、戦略目標を定義させた。これらの\n戦略目標と予算目標を達成するために、経営委員会は戦略プロジェクト\nのポートフォリオを考案し、提案した。全社レベルの戦略が承認される\nと、各々の事業部が計画、予算、業績指標を構築するように指示された。\nD技術大学が省いてしまつたステップは、次のうちどれか。", "choices": [{"key": "a", "text": "|ヨ将零隻定三(Goal Setting)"}, {"key": "b", "text": "資 '原 酉己分 (Resouκ e A‖ ocation)"}, {"key": "c", "text": "測定(Measuにment)"}, {"key": "d", "text": "内部・タト音F環ち竃 ,OD′)オ斤 (Internal and External Analysis)"}], "answer": "d", "explanation": "フ 競合分析\nフ.8\nレームワーク\n正解: d\n戦略計画フレームワークは、FP&A実務の視点から戦略プロセスをまとめたもので\nある。「ミッシ∃ン、ビジョン、価値観」が中心にあり、その周りに6つの戦略プロ\nセスが順番に繋がつている。最初のプロセスは、「内部・外部環境の分析」である。\nD技術大学はこれからの5年間の戦略計画を作成するプロセスにおいて、「内部。外\n部環境の分析」を省いてしまつている。\nしたがって、正解は(d)となる"}, {"id": "ch2_018", "no": 18, "chapter": "第2章 戦略、組織及び業界", "topic": "7", "question": "機能組織レベル(本社レベルではなく、事業部レベル)において、実施\nされる戦略計画プロセスとして、適切なものはどれか。", "choices": [{"key": "a", "text": "戦略計画プロセスは、"}, {"key": "b", "text": "戦略計画プロセスは、"}, {"key": "c", "text": "戦略計画プロセスは、 進められる"}, {"key": "d", "text": "戦略計画プロセスは、 プロセスの全体が繰り返される 当初のSWOT分析を除外できる 本社経営陣のモニタリングや承認から独立して 予算プロセスによって置き換えられる"}], "answer": "a", "explanation": "。\n7 \n競合分析\n7.8 戦略計画フレームワーク\n正解: a\n戦略計画フレームワークは、FP&A実務の視点から戦略プロセスをまとめたもので\nある。戦略計画プロセスは、本社レベルだけでなく、機能組織レベル\n(いわゆる事業\n部レベル)においても、戦略プロセスの全体が繰り返される。\nしたがって、正解は(a)となる"}, {"id": "ch2_019", "no": 19, "chapter": "第2章 戦略、組織及び業界", "topic": "8 組織構造 / 8.1 会計責任範囲", "question": "「組織構成員の動機づけおよび関心範囲に影響を与える3つの要因」に含\nまれていない要因として、適切なものはどれか。", "choices": [{"key": "a", "text": "ワーク・ユニットの設計 (職能別組織vs.事業部制組織)"}, {"key": "b", "text": "マネージャーの管理範囲 (権限)"}, {"key": "c", "text": "マネージャーの会計責任範囲(責任)"}, {"key": "d", "text": "組織の事業戦略"}], "answer": "d", "explanation": "8 組織構造\n8.1 会計責任範囲\n正解: d\nロバート・サイモンズは、組織構成員の動機づけ\n(目標一致と組織構成員の努力)\nおよび関心範囲(組織構成員は何に気をつけ、何に注意を払えばよいか)に影響を与\nえる要因として、組織構造(職能別組織vs.事業部制組織)、\nマネージヤーの管理\n範囲(権限)、\nマネージャーの会計責任範囲(責任)の3つを挙げる。組織の事業戦\n略は含まれていない。\nしたがって、正解は(d)となる"}, {"id": "ch2_020", "no": 20, "chapter": "第2章 戦略、組織及び業界", "topic": "8 組織構造 / 8,1", "question": "組織階層における各管理者の会計責任範囲を端的に表現する用語として、\n適切でないものはどれか。", "choices": [{"key": "a", "text": "コストセンター"}, {"key": "b", "text": "プロフィットセンター"}, {"key": "c", "text": "インベストメントセンター"}, {"key": "d", "text": "アカウンティングセンター"}], "answer": "d", "explanation": "。\n8 組織構造\n8,1\n正解: d\n会計責任範囲を定める責任会計では、コストセンター、レベニューセンター、プロ\nフィットセンター、インベストメントセンターが利用される。これは会計の典型的な\n用語を用いて、各組織の会計ないし財務的な責任を明確にすることに趣旨があり、コ\nストセンターであればコスト、レベニューセンターであればレベニュー、プロフィッ\nトセンターであればプロフィット、インベストメントセンターであればインベストメ\nント(投下資本利益率)に責任を持つことになる。\n責任会計は組織の全体最適を図る手段として採用され、各組織の権限や裁量に応じ\nて適切に設計することが求められる。各組織が割り当てられた会計責任を果たすこと\nで、組織全体の全体最適が達成されるというのが基本的な考え方である。\nしたがって、正解は(d)となる"}, {"id": "ch2_021", "no": 21, "chapter": "第2章 戦略、組織及び業界", "topic": "8 組織構造 / 8.1", "question": "管理者の会計責任範囲は管理範囲と合致する必要があり、両者の合致は管\n理業績を適切に可視化する。そのような整備が行われる目的もしくは意図\nとして、正しいものはどれか。", "choices": [{"key": "a", "text": "部分最適"}, {"key": "b", "text": "リアルオプション"}, {"key": "c", "text": "目標の整合"}, {"key": "d", "text": "全体構造"}], "answer": "c", "explanation": "8 組織構造\n8.1\n正解: c\n会計責任範囲と管理範囲を合致させることは、現象としては管理業績を適切に可視\n化することにある一方、目的ないし意図としては組織全体の目標の整合を高めること\nがある。\n組織内の各単位では権限や裁量、守備範囲が異なり、責任が持てることと持てない\nことが組織単位によって変わるが、管理者の会計責任範囲と管理範囲を合致させるの\nは、そのような違いを勘案して適切に管理業績を可視化する上で不可欠である。\n一方、責任会計は組織全体の全体最適を実現する目的を持つて設計され適用される\nものであるため、責任会計の徹底によって各組織単位で責任が果たされ、全体最適が\n実現するという構図としなければならない。つまり、組織全体として、そして組織内\nの各単位で目標が整合性を持つことを確保する必要がある。少なくとも決定的に目標\nが矛盾したり対立したりしないことが必要で、目標の整合(Goal Congruence)は\nマネジメント・コントロール・システムの設計と運営にあって最重要の鍵概念であ\nる。\nしたがって、正解は(c)となる"}, {"id": "ch2_022", "no": 22, "chapter": "第2章 戦略、組織及び業界", "topic": "8 組織構造 / 8.1 会計責任範囲", "question": "管理会計の研究者であるロバート・アンソニーは、責任センターの業績評\n価指標には、「Xの業績評価指標」ではなく、「Yの業績評価指標」を用いるベ\nきとする。XとYの組み合わせとして、正しいものはどれか。", "choices": [{"key": "a", "text": "X:1遅イテ Y:先イテ"}, {"key": "b", "text": "X:財務 Y:業 務"}, {"key": "c", "text": "× :事業 Y:管理者"}, {"key": "d", "text": "X:管理者 Y:事業"}], "answer": "c", "explanation": "。\n8 組織構造\n8.1 会計責任範囲\n正解: c\nロバート・アンソニーは、責任センターを「その活動に責任を有する管理者によつ\nて率いられている組織単位」と定義する。責任センターの業績評価指標には、「事業\nの業績評価指標(Economic Perormance Measures of Entities)」\nと「管理者の\n業績評価指標(Manageent Perormance Measures of Managers)の2つがある。\n経営管理プロセスとしての責任センターの業績評価指標には、事業の業績評価指標\nを用いるのに対して、マネジメント・コントロール・システムとしての責任センター\nの業績評価指標には、管理者の業績評価指標を用いる。\nしたがって、正解は(c)となる"}, {"id": "ch2_023", "no": 23, "chapter": "第2章 戦略、組織及び業界", "topic": "8 組織構造 / 8.1 会計責任範囲", "question": "責任センターの業績は、管理者が管理可能なコストによって評価される。\n管理可能なコストを決める基準として、正しいものはどれか。", "choices": [{"key": "a", "text": "直接労務費と直接材料費"}, {"key": "b", "text": "管理者が当該会計期間に影響を与えることができるコスト"}, {"key": "c", "text": "裁量費用(Discにtionary Costs)"}, {"key": "d", "text": "管理者が知見を有し、その情報にアクセスできることのコスト"}], "answer": "b", "explanation": "8 組織構造\n8.1 会計責任範囲\n正解: b\n管理者の権限と責任の関係は、管理可能性基準で決まる。伝統的には管理者が最終\n的な決定権限を有している管理範囲に合致するように会計責任範囲を設定した。今日\nでは管理者が当該会計期間に影響を与えることができる管理範囲に合致するように会\n計責任範囲を設定すべきとされている。\nしたがって、正解は(b)となる"}, {"id": "ch2_024", "no": 24, "chapter": "第2章 戦略、組織及び業界", "topic": "8 組織構造 / 8.2", "question": "職能別部門組織において、「生産、販売などの売上や利益の獲得に直結し\nた機能」として、適切なものはどれか。", "choices": [{"key": "a", "text": "本社機能"}, {"key": "b", "text": "事業部機能"}, {"key": "c", "text": "ライン機能"}, {"key": "d", "text": "スタッフ機能"}], "answer": "c", "explanation": "。\n8 組織構造\n8.2\n,事業部制組織\n正解: c\n組織構造の基本形には、職能部門別組織と事業部門別組織の2つがある。職能部門\n別組織において、生産、販売などの売上や利益の獲得に直結した職能を「ライン職\n能」と呼び、ライン職能を支援する職能を「スタッフ職能」と呼ぶ。\nしたがって、正解は(c)となる"}, {"id": "ch2_025", "no": 25, "chapter": "第2章 戦略、組織及び業界", "topic": "8 組織構造 / 8.2", "question": "ワーク・ユニツトの設計に関して、正しいものどれか。", "choices": [{"key": "a", "text": "如何なる企業も、全体として見れば、市場別組織である"}, {"key": "b", "text": "市場別組織のメリットは専門化である"}, {"key": "c", "text": "組織の最下層においては、全ての業務活動が市場別に括られている"}, {"key": "d", "text": "専門化によるメリットが市場対応力によるメリットよりも大きい時、 経営者は市場別組織を編成する"}], "answer": "a", "explanation": "8 組織構造\n8.2\nロバート・サイモンズは、組織構造の設計において、「組織の最上層においては、\n市場別に分権化した市場別組織になる」および「組織の最下層においては、全ての業\n務活動が職能別に括られる」という2つの原則があるとする。市場別組織のメリット\nは市場における顧客や競合への対応力の向上にある。職能別組織のメリットは専門化\nにある。\nしたがって、正解は(a)となる"}, {"id": "ch2_026", "no": 26, "chapter": "第2章 戦略、組織及び業界", "topic": "9 組織文化 / 9.1", "question": "組織文化には公式のものと非公式のものがある。公式の組織文化に含まれ\nないものはどれか。", "choices": [{"key": "a", "text": "組織としての統合は、伝統と相互のやりとりで示される"}, {"key": "b", "text": "組織としての統合は、正式の文書、ビジョンおよび目標で示される"}, {"key": "c", "text": "コミュニケーションは、命令系統に沿つて垂直に、同じレベルの部門 間で水平に行われる"}, {"key": "d", "text": "コミュニケーションは、定例会議や定例報告書など計画的に行われる"}], "answer": "a", "explanation": "。\n9 組織文化\n9.1\n化と戦略\n正解: a\n組織文化は、組織の個性を決める組織構成員によって共有される信念、規範、価値\n観に関するものである。公式の組織文化と非公式の組織文化が存在する。公式の組織\n文化に含まれないものには、文書で示されない伝統や儀式がある。本問の選択肢で\nは、「組織としての統合は、伝統と相互のやりとりで示される」が該当する。\nしたがって、正解は(a)となる"}, {"id": "ch3_027", "no": 27, "chapter": "第3章 予算管理（計画と統制）", "topic": "11 原価 / 11.l CVP分析", "question": "損益分岐点売上高は、Xを限界利益率で除して求める。Xに該当するものは\nどれか。", "choices": [{"key": "a", "text": "変動費"}, {"key": "b", "text": "固定費"}, {"key": "c", "text": "準変動費"}, {"key": "d", "text": "準固定費"}], "answer": "b", "explanation": "11 原価\n11.l CVP分析\n正解: b\nCVP分析(Cost Volume Profit Analysis)は、損益分岐点分析とも呼ばれる。営\n業利益がゼロとなる損益分岐点になる売上高を求めるための分析である。売上高ベー\nスの損益分岐点は、固定費を限界利益率(100%から変動費率を控除した比率)で除\nして求める。\nしたがって、正解は(b)となる"}, {"id": "ch3_028", "no": 28, "chapter": "第3章 予算管理（計画と統制）", "topic": "11 原価 / 11.l CVP分オ斤", "question": "損益分岐点売上数量は、固定資をXで割つて求める。×に該当するものは\nどれか。", "choices": [{"key": "a", "text": "限界利益率"}, {"key": "b", "text": "1個当たり限界利益"}, {"key": "c", "text": "限界利益"}, {"key": "d", "text": "売上高"}], "answer": "b", "explanation": "。\n11 原価\n11.l CVP分オ斤\n正解: b\n損益分岐点売上数量は、「固定費」+「1個当たりの限界利益」で求められる。\nしたがって、正解は(b)となる"}, {"id": "ch3_029", "no": 29, "chapter": "第3章 予算管理（計画と統制）", "topic": "11 原価 11.2関", "question": "意思決定に関連した関連原価に関して、該当しないものはどれか。", "choices": [{"key": "a", "text": "将来に発生する原価(Future Cost)"}, {"key": "b", "text": "代替案間の差額原価(Incにmenta:Cost)"}, {"key": "c", "text": "土里没原価(Sunk Cost)"}, {"key": "d", "text": "機会原価 (Opportunity Cost)"}], "answer": "c", "explanation": "11 原価 11.2関\n連原価 \n正解:c\n意思決定における代替案の経済的効果の評価に関連した情報が「関連情報」であ\nる。原価に関する関連情報を「関連原価」と呼ぶ。関連原価の2つの要件とは、「将\n来に発生する原価」と「代替案の間における差額原価」の両方を満たすことである。\n原価が関連原価に該当しない場合、「無関連原価」と呼ばれる。「埋没原価」は、す\nでに支出済みで、しかも回収不能な原価\n(使わなくなった施設等の未回収原価)であ\nり、「無関連原価」である。\nしたがって、正解は(c)となる"}, {"id": "ch3_030", "no": 30, "chapter": "第3章 予算管理（計画と統制）", "topic": "11 原価 / 11.2関連原価", "question": "複数の選択肢の中から1つの選択肢を実行するための投資意思決定におい\nて、最も適切な選択肢ではない、次点に位置する選択肢を選ばないことに\nよって失われる便益はどれか。", "choices": [{"key": "a", "text": "期待イ直 (Expected Value)"}, {"key": "b", "text": "土曽 |夕)房可 i面 (Increnlental Cost)"}, {"key": "c", "text": "IE味実現可育旨イ面客買(Net Rea‖ zable Value)"}, {"key": "d", "text": "機会原価(OpportuniW COSt)"}], "answer": "d", "explanation": "。\n11 原価\n11.2関連原価\nIE角革: d\n関連原価の2つの要件とは、「将来に発生する原価」と「代替案の間における差額\n原価」の両方を満たすことである。機会原価は関連原価として将来における収入の減\n少と結びついている。資源の利用に関する意思決定において特定の代替案を選択する\nと、別の代替案の利用可能性が失われる。複数の代替案の選択において、最も適切な\n選択肢を選び、次点に位置する選択肢を選ばないことによって失われる便益を機会原\n価と呼ぶ。\nしたがって、正解は(d)となる"}, {"id": "ch3_031", "no": 31, "chapter": "第3章 予算管理（計画と統制）", "topic": "11 原価 / 11.2関連原価", "question": "部品を製造する企業が、ある部品に関して1回だけの特別注文を受けた。\n特別注文に応じるのに必要な製造能力を有している場合、以下の原価の\nうち、関連原価ではないものはどれか。", "choices": [{"key": "a", "text": "`≧書FI芹可面 (Absorption Costs)"}, {"key": "b", "text": ",圭客買原価 (Dtterent† al Costs)"}, {"key": "c", "text": "直接原価 (Diにct Costs)"}, {"key": "d", "text": "変動原イ面(Variable Costs)"}], "answer": "a", "explanation": "11 原価\n11.2関連原価\n正解: a\n関連原価の2つの要件とは、「将来に発生する原価」と「代替案の間における差額\n原価」の両方を満たすことである。本問の選択肢の中で関連原価の要件の1つである\n「代替案の間における差額原価」を満たさないのは、全部原価である。\nしたがって、正解は(a)となる"}, {"id": "ch3_032", "no": 32, "chapter": "第3章 予算管理（計画と統制）", "topic": "11 原価 / 11.2関連原価", "question": "食品を製造する企業が、パイ生地を製造している。このパイ生地製品に\nトッピングを加えて、オーブンで焼くだけのパイ商品にする選択肢に関\nして、関連原価ではないものはどれか。", "choices": [{"key": "a", "text": "トッピングを加える原価"}, {"key": "b", "text": "パイ生地を製造する原価"}, {"key": "c", "text": "パイ製品の売価"}, {"key": "d", "text": "パイ生地の売価"}], "answer": "b", "explanation": "。\n11 原価\n11.2関連原価\n正解: b\n関連原価の2つの要件とは、「将来に発生する原価」と「代替案の間における差額\n原価」の両方を満たすことである。本問の選択肢の中で関連原価の要件の1つである\n「代替案の間における差額原価」を満たさないのは、パイ生地を製造する原価であ\nる。パイ生地を製造する原価は、すでに支出済みの原価であり、埋没原価であり、無\n関連原価である。\nしたがって、正解は(b)となる"}, {"id": "ch3_033", "no": 33, "chapter": "第3章 予算管理（計画と統制）", "topic": "11 原価 / 11.3原価の種類", "question": "裁量的労務コスト(Discretionary)に該当するものはどれか。", "choices": [{"key": "a", "text": "雇用契約に含まれている育児援助費"}, {"key": "b", "text": "従業員の所得税"}, {"key": "c", "text": "年度により支給されることのある特別賞与"}, {"key": "d", "text": "主要業績指標と結びついた経営陣の業績賞与"}], "answer": "c", "explanation": "11 原価\n11.3原価の種類\n正解 : c\n裁量的コストとは、管理者もしくは経営陣の裁量によって支出を変更することがで\nきるコストである。裁量的コストの例として、広告宣伝費がある。経営陣が年度予算\nにおいて広告宣伝費の支出額を決め、年度途中に企業業績の進捗に合わせて支出額を\n調整することができる。本問の選択肢の中で裁量的労務コストに該当するのは、年度\nにより経営陣の裁量で支給することが可能な特別賞与である。\nしたがって、正解は(c)となる"}, {"id": "ch3_034", "no": 34, "chapter": "第3章 予算管理（計画と統制）", "topic": "11 原価 / 11.4直接原価計算", "question": "全部原価計算での製品原価には含まれて、直接原価計算での製品原価に含\nまれないものはどれか。", "choices": [{"key": "a", "text": "製造原価に含まれる変動費"}, {"key": "b", "text": "製造原価に含まれる固定費"}, {"key": "c", "text": "販売費および一般管理費に含まれる変動費"}, {"key": "d", "text": "販売費および一般管理費に含まれる固定費"}], "answer": "b", "explanation": "。\n11 原価\n11.4直接原価計算\n正解: b\n全部原価計算と直接原価計算の違いは、製品原価に製造原価の固定費を含めるかど\nうかである。\nしたがって、正解は(b)となる"}, {"id": "ch3_035", "no": 35, "chapter": "第3章 予算管理（計画と統制）", "topic": "12 固定費の分析 / 12.1営業レバレッジ", "question": "営業レバレッジ・レシオの定義は、「企業の売上高が1%変化した場合の、\nXの変化率(%)」\nである。Xに該当するものはどれか。", "choices": [{"key": "a", "text": "貢献利益"}, {"key": "b", "text": "限界利益"}, {"key": "c", "text": "売上総利益"}, {"key": "d", "text": "営業利益"}], "answer": "d", "explanation": "12 固定費の分析\n12.1営業レバレッジ\n正解: d\n営業レバレッジは、企業による「営業活動に関する固定費」の利用である。営業活\n動において、変動買ではなく固定賣が利用される程度である。営業レバレッジは、企\n業の営業活動に関する不確実性である「事業リスク」を構成する要因の1つである。\n売上高の変動性が存在する場合に限つて営業レバレッジの効果が発現する。営業レバ\nレッジ・レシオの定義は、「企業の売上高が1%変化した場合の、営業利益\n(EBI丁)の変化率(%)」\nである。\nしたがって、正解は(d)となる"}, {"id": "ch3_036", "no": 36, "chapter": "第3章 予算管理（計画と統制）", "topic": "12 固定費の分析 / 12.2財務レバレッジ", "question": "財務リスクは企業の財務レバレッジの利用によってもたらされる。財務リ\nスクは、当期純利益の変動性の増加とXの増加の2つを含む。Xに該当する\nものはどれか。", "choices": [{"key": "a", "text": "営業利益の変動"}, {"key": "b", "text": "限界利益の変動"}, {"key": "c", "text": "売上総利益の変動"}, {"key": "d", "text": "倒産リスク"}], "answer": "d", "explanation": "。\n12 固定費の分析\n12.2財務レバレッジ\nIE角準: d\n財務レバレッジは、企業による「財務活動に関する固定費」の利用である。財務活\n動における固定費の代表的なものは、負債に関する支払利子である。経営者の判断に\nよる財務レバレッジの利用は、「財務リスク」をもたらす。「財務リスク」には、当\n期純利益の変動性の増加と倒産リスクの増加が含まれる。\nしたがって、正解は(d)となる"}, {"id": "ch3_037", "no": 37, "chapter": "第3章 予算管理（計画と統制）", "topic": "13 差異分析 / 13.1月次報告", "question": "グローバル企業における月次報告書において、予算目標を達成するための\n是正措置を講じる目的で行われる分析として、適切なものはどれか。", "choices": [{"key": "a", "text": "予実分析 (当月予算と当月実績の差異分析)"}, {"key": "b", "text": "対前年度同月実績分析(本年度当月実績と前年度同月実績の差異分析)"}, {"key": "c", "text": "対前月実績分析(本年度当月実績と本年度前月実績の差異分析)"}, {"key": "d", "text": "予予分析 (予算・予測差異分析)"}], "answer": "d", "explanation": "13 差異分析\n13.1月次報告\n正解: d\n月次会議は年度予算目標の達成を目的とする。月次会議における年度予算と実績の\n差異分析は「予実分析\n(予算。実績差異分析)」と呼ばれる。グローバル企業におけ\nるFP&Aの役割は予測のアップデートを作成し、年度予算とアップデートされた予測\nの差異分析を行い、年度予算と予測値の差異に対して是正措置を提案することにあ\nる。このプロセスが、「予予分析(予算・予測差異分析)」と呼ばれる。\nしたがって、正解は(d)となる"}, {"id": "ch3_038", "no": 38, "chapter": "第3章 予算管理（計画と統制）", "topic": "13 差異分析 / 13.1月次報告", "question": "月次報告会議は戦略実行を支援するだけでなく、戦略の創発を促す場とし\nて機能することが期待される。戦略の創発を促すコントロール・システム\nとして、正しいものはどれか。", "choices": [{"key": "a", "text": "診断型コントロール・システム"}, {"key": "b", "text": "専門的コントロール・システム"}, {"key": "c", "text": "命令統制型コントロール・システム"}, {"key": "d", "text": "対話型コントロール・システム"}], "answer": "d", "explanation": "。\n13 差異分析\n13.1月次報告\n正解: d\n月次報告会議は第一に戦略実行を支援する場として機能することが求められ、当初\n計画に対する実績を検証する。当該検証は差異分析を通じて行われ、何がどう計画と\n実績との間に違いがあるかを見定める。\n一方、月次報告会議は第二に戦略の創発を促す場として機能することが求められ、\n戦略の創発は戦略実行の過程から生まれることから、闊達な意見交換が必須である。\n月次報告会議の上記2つの役割はマネジメント・コントロールの要であるが、戦略\n実行を支援する基本的なコントロール・システムの型は診断型であり、戦略の創発を\n促すコントロール・システムは対話型コントロール・システムである。\nしたがって、正解は(d)となる"}, {"id": "ch3_039", "no": 39, "chapter": "第3章 予算管理（計画と統制）", "topic": "13 差異分析 / 13.2 固", "question": "予算差異分析における固定予算差異を分解すると、以下のどれになるか。", "choices": [{"key": "a", "text": "変動予算差異と売上ミックス差異"}, {"key": "b", "text": "販売活動差異と売上数量差異"}, {"key": "c", "text": "売上数量差異と売上ミックス差異"}, {"key": "d", "text": "変動予算差異と販売活動差異"}], "answer": "d", "explanation": "13 差異分析\n13.2 固\n正解: d\n固定予算差異は、変動予算差異と販売活動差異に分けられる。 販売活動差異は、\n売上数量差異と売上ミックス差異に分けられる。\nしたがって、正解は(d)となる"}, {"id": "ch3_040", "no": 40, "chapter": "第3章 予算管理（計画と統制）", "topic": "13 差異分析 / 13.3販売活動差異", "question": "予算差異分析における販売活動差異を分解すると、以下のどれになるか。", "choices": [{"key": "a", "text": "変動予算差異と売上ミックス差異"}, {"key": "b", "text": "販売活動差異と売上数量差異"}, {"key": "c", "text": "売上数量差異と売上ミックス差異"}, {"key": "d", "text": "変動予算差異と販売活動差異"}], "answer": "c", "explanation": "。\n13 差異分析\n13.3販売活動差異\n正解: c\n販売活動差異は、売上数量差異と売上ミックス差異に分けられる。 固定予算差異\nは、変動予算差異と販売活動差異に分けられる。\nしたがって、正解は(c)となる"}, {"id": "ch3_041", "no": 41, "chapter": "第3章 予算管理（計画と統制）", "topic": "14 予算と予測 / 14,2実行予算", "question": "「月毎もしくは四半期毎に、月もしくは四半期の追加の予算データを年度\n予算に経常的に付け加える予算で、業績評価および報酬とは切り離して統\n制(Contro‖ ing)目的で使用される予算」に該当しないものはどれか。", "choices": [{"key": "a", "text": "□―リング予算"}, {"key": "b", "text": "継続予算"}, {"key": "c", "text": "実行予算"}, {"key": "d", "text": "固定期間予算(年度予算)"}], "answer": "d", "explanation": "14 予算と予測\n14,2実行予算\n正解: d\n□―リング予算は、継続予算もしくは実行予算とも呼ばれる。月毎もしくは四半期\n毎に、月もしくは四半期の追加の予算データを年度予算に経常的に付け加え、組織の\n構成員に当該年度の固定業績目標にのみ意識を集中させる傾向を緩和し、外部環境の\n変化に対応して常に向こう12月間を考えさせる効果がある。□一リング予算は、業\n績評価および報酬とは切り離して、統制(ContЮ ‖ing)目的で使用されることが多\nい。\nしたがって、正解は(d)となる"}, {"id": "ch3_042", "no": 42, "chapter": "第3章 予算管理（計画と統制）", "topic": "14 予算と予測 / 14.3総合予算", "question": "予算と予測の関連の説明として、正しいものはどれか。", "choices": [{"key": "a", "text": "予算は経営陣の目標を反映し、経営陣が承認した最終版の予測である"}, {"key": "b", "text": "予算は財務会計システムから作成される。予測は管理会計システムから 作成される"}, {"key": "c", "text": "予算は起こつて欲しいことを反映する。予測は起こる可能性が高いこと を反映する"}, {"key": "d", "text": "予算は経理部門によって作成される。予測はF閣議部門によって作成さ れる"}], "answer": "a", "explanation": "。\n14 予算と予測\n14.3総合予算\n正解: a\n予算は経営陣の目標を反映した、経営陣が承認した最終版の予測である。経営陣は\n組織構成員を高い業績に向けて動機づけるために、売上高の当初予測額を上回る額で\n予算を設定することがある。FP&Aの役割は、当初予測額と予算額のギャップを行動\nに反映することが可能な是正措置で埋めることであり、運用を誤ると、不適切会計等\nの問題を引き起こす懸念もある。\nしたがって、正解は(a)となる"}, {"id": "ch3_043", "no": 43, "chapter": "第3章 予算管理（計画と統制）", "topic": "14 予算と予測 / 14.3総合予算", "question": "総合予算の業務予算作成の出発点になる予算として、適切なものはどれか。", "choices": [{"key": "a", "text": "資本予算"}, {"key": "b", "text": "期末在庫高予算"}, {"key": "c", "text": "仕入予算"}, {"key": "d", "text": "売上高予算"}], "answer": "d", "explanation": "14 予算と予測\n14.3総合予算\n正解: d\n年度予算は総合予算とも呼ばれ、業務予算と財務予算の2つから構成される。業務\n予算は利益計画であり、損益計算書予算である。業務予算作成の最初のステップは、\n売上高を予測し、予測売上高を基に売上高予算を設定することである。\nしたがって、正解は(d)となる"}, {"id": "ch3_044", "no": 44, "chapter": "第3章 予算管理（計画と統制）", "topic": "14 予算と予測 / 14.4中長期経営計画", "question": "マネジメント・コントロールは計画と統制を対概念として行われる。基本\n目標や基本戦略を遂行する計画面の起点となるツールとして、適切なもの\nはどれか。", "choices": [{"key": "a", "text": "構造化計画"}, {"key": "b", "text": "短期利益計画"}, {"key": "c", "text": "予算"}, {"key": "d", "text": "中長期経営計画"}], "answer": "d", "explanation": "。\n14 予算と予測\n14.4中長期経営計画\n正解: d\nマネジメント・コントロールは戦略の策定を受けて行われるが、戦略の策定は組織\nの基本目標や基本戦略に関わる。マネジメント・コントロールは組織の基本目標や基\n本戦略の実行を担い、実行は計画と統制がセットである。そして、計画は基本目標や\n基本戦略を如何に(how)実行するかをプログラム化することが起点となる。また、\n組織の基本目標や基本戦略をプログラム化するのが戦略的計画の役割であり、具体的\nには中長期経営計画が対応する。\nしたがって、正解は(d)となる"}, {"id": "ch3_045", "no": 45, "chapter": "第3章 予算管理（計画と統制）", "topic": "15 予測財務諸表の作成 15.1経費。人員数の予測", "question": "採用に関する戦略目標と戦術的な実行の2つを繋ぐリンクとして、正しい\nものはどれか。", "choices": [{"key": "a", "text": "Cost-Volume-Profit Analysis"}, {"key": "b", "text": "Headcount Projections"}, {"key": "c", "text": "Pro-Forma Financial Statements"}, {"key": "d", "text": "Discounted Cash Flow Analysis"}], "answer": "b", "explanation": "15 予測財務諸表の作成 15.1経費。人員数の予測\n正解:b\nグローバル企業におけるFP&Aの役割の1つが人員数の計画および統制である。グ\n□―バル企業において人員数予算は年度予算の主要な要素である。人員数は売上高お\nよび販管費の主要なドライバーである。採用に関して戦略目標と戦術的な実行の2つ\nを繋ぐリンクは、月次で行われる人員数の分析と予測(Headcount Praections)\nである。\nしたがって、正解は(b)となる"}, {"id": "ch3_046", "no": 46, "chapter": "第3章 予算管理（計画と統制）", "topic": "15 予測財務諸表の作成 15.1経費。人員数の予測", "question": "自社の生産性が将来、退職者の増加で維持できなくなる可能性がある。適\n切な人員数(Headcount)予測をサポートするカテゴリーの分類として、\n適切なものはどれか。", "choices": [{"key": "a", "text": "従業員の属性データ(Demographic data)"}, {"key": "b", "text": "プロフィットセンターによる分類"}, {"key": "c", "text": "自社での勤務年数による分類"}, {"key": "d", "text": "部門と職種による分類 による分類"}], "answer": "a", "explanation": "。\n15 予測財務諸表の作成 15.1経費。人員数の予測\n正解: a\n自社の生産性が将来、退職者の増加で維持できなくなる可能性がある場合に適切な\n人員数予測をサポートするのは、デモグラフイック・データ\n(従業員の属性データ、\n年齢などを指す)による人員数の分類である。\nしたがって、正解は(a)となる"}, {"id": "ch3_047", "no": 47, "chapter": "第3章 予算管理（計画と統制）", "topic": "15 予測財務諸表の作成 15.1経費。人員数の予測", "question": "販売・一般管理費(SG&A)を予測するにあたり、主な注意点として、1適切な\nものはどれか。", "choices": [{"key": "a", "text": "SG&Aは売上高予測の比率で計算されることが多いが、その要素には固定 費や売上高の成長に影響されない費用が含まれている"}, {"key": "b", "text": "SG&Aは固定費と変動費を合計しているので、複数の互いに矛盾する会計 手法が含まれている"}, {"key": "c", "text": "SG&Aは様々な種類の費用から構成されており、その内容は年度毎に大き く変化する"}, {"key": "d", "text": "米国会計基準はSG&Aに含まれる費用を厳密に定義しているが、売上高に 含まれるものを厳密に定義していない。そのためSG&Aの売上高に対する 比率を一貫した手法で補足するのが難しい"}], "answer": "a", "explanation": "15 予測財務諸表の作成 15.1経費。人員数の予測\n正解: a\n販売・一般管理費(SG&A)を予測するにあたり主な注意点は、SG&Aは売上高予\n測の比率で計算されることが多いが、その要素には固定賣や売上高の成長に影響され\nない費用が含まれていることである。\nしたがって、正解は(a)となる"}, {"id": "ch3_048", "no": 48, "chapter": "第3章 予算管理（計画と統制）", "topic": "15 予測財務諸表の作成 15.1経費。人員数の予測", "question": "売上原価(COGS:Cost of Goods Sold)を予測するにあたり、COGSと財務\n諸表の他の項目との関係が使用される。その項目と関係の説明として、適切\nなものはどれか。", "choices": [{"key": "a", "text": "COGSは売上高に対する比率を基に予測できる。もしくはCOGSと売上総 利益と売上高の関係を基に予測できる"}, {"key": "b", "text": "COGSを予測するための主な関係は、COGSの変動費と貸借対照表上の資 産に対する関係である"}, {"key": "c", "text": "COGSをどの項目が定義するかは、企業が製品を販売するのか(固定費が 鍵になる)、 サービスを販売するのか (変動費が重要)による"}, {"key": "d", "text": "COGSを予測することにおいて最も信頼性が高く、明白な情報源は、過去 のCOCSの実績値のトレンドである"}], "answer": "a", "explanation": "。\n15 予測財務諸表の作成 15.1経費。人員数の予測\n正解\n: a\n売上原価(COGS:Cost of Goods Sold)を予測するにあたり、売上原価\n(COGS)と財務諸表の他の項目との関係が使用される。その項目と関係は、\n「COGSは売上高に対する比率を基に予測できる。もしくはCOGSと売上総利益と売\n上高の関係を基に予測できる」である。\nしたがって、正解は(a)となる"}, {"id": "ch4_049", "no": 49, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.l BIツール", "question": "BIツールの特徴として、適切でないものはどれか。", "choices": [{"key": "a", "text": "ユーザーインターフェースがわかりやすい"}, {"key": "b", "text": "エラーが発生するリスクが小さい"}, {"key": "c", "text": "複数のユーザーが送信したデータを統合しやすい"}, {"key": "d", "text": "スプレッドシートの機能を完全にBIで置き換えることができる"}], "answer": "d", "explanation": "16 ツールの活用\n16.l BIツール\n正解: d\nBIツールにより、動的なグラフやマップの作成、活用が可能になったことにより、\nExcel等のスプレッドシートが不要になるという期待があるが、BIツールを利用する\nために接続するデータを整備する段階で、スプレッドシートを活用することは不可欠\nである。\nしたがって、正解は(d)となる"}, {"id": "ch4_050", "no": 50, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.l BIツール", "question": "BIツールを導入するメリットとして、適切でないものはどれか。", "choices": [{"key": "a", "text": "セットアップや管理が容易である"}, {"key": "b", "text": "可視化による現状把握が簡単にできる"}, {"key": "c", "text": "レポートの作成時間が短縮できる"}, {"key": "d", "text": "動的なドリルダウン、 ドリルアツプが可能である"}], "answer": "a", "explanation": "。\n16 ツールの活用\n16.l BIツール\n正解: a\nBIツールは膨大なデータを可視化して、動的なドリルダウン、 ドリルアップが可能\nであり、これらを通じて現状を把握することを助ける。また、表計算アプリケーシ∃\nンよりも見やすいグラフやマップを含むレポートを短時間で作成することができる。\n―方で、BIツールをセットアップしたり管理したりするには煩雑な作業が必要になる\nため、一定以上のスキルが要求される。\nしたがって、正解は(a)となる"}, {"id": "ch4_051", "no": 51, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.l BIツール", "question": "BIを活用するためのデータの前処理として、適切でないものはどれか。", "choices": [{"key": "a", "text": "データの型を揃える"}, {"key": "b", "text": "重複データをユニーク化する"}, {"key": "c", "text": "クロス集計を行う"}, {"key": "d", "text": "顧客データを名寄せする"}], "answer": "c", "explanation": "16 ツールの活用\n16.l BIツール\n正解 : c\nBIツールに接続するデータは、フィールド別に縦に配置されたデータが機械判別さ\nれやすく、クロス集計されたデータは適さない。\nしたがって、正解は(c)となる"}, {"id": "ch4_052", "no": 52, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.l BIツール", "question": "BIツールによって実現可能なこととして、適切でないものはどれか。", "choices": [{"key": "a", "text": "オフィスなどのコンピュータだけでなくスマートフォンなどからも売上や 経営のデータをリアルタイムで把握する"}, {"key": "b", "text": "高度な専門知識が無くても機械学習のモデルを活用してインサイトを得る"}, {"key": "c", "text": "オンプレミス、クラウドを問わず、様々なデータを連携して管理する"}, {"key": "d", "text": "ダッシュボードを通じて、直接元データを修正したり追加したりする"}], "answer": "d", "explanation": "。\n16 ツールの活用\n16.l BIツール\n正解:d\nBIツールでは、コンピュータやスマートフォンの画面上で、直感的なインター\nフェースを通じて、様々なデータを整理したり動的に可視化したりすることができ\nる。これらの処理は、直接、元データを変更するのではなく、元データに接続し、非\n破壊で行われる。セキュリティの観点からも、元データを直接修正したり追加したり\nすることはできない。\nしたがって、正解は(d)となる"}, {"id": "ch4_053", "no": 53, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2", "question": "Excelフアイルにおいて、A列に取引先の会社名、B列に取引先の前年\n売上高が入力されている。あらかじめ抽出された100社の前年売上高をリス\nト化したいが、取引先数は数千あり、そこから100社を目視で拾うことは難\nしい。別シートで、会社名。前年売上高をリスト化する際に、この状況で\n使えるExcel関数として、正しいものはどれか。", "choices": [{"key": "a", "text": "SUM関数"}, {"key": "b", "text": "VLOOKUP関釜文"}, {"key": "c", "text": "SUBTOTALi関1委文"}, {"key": "d", "text": "HLOOKUP関委女"}], "answer": "b", "explanation": "16 ツールの活用\n16.2\nドシート\n正解: b\nVLOOKUP関数は、シートの縦方向にデータを検索し、一致した値と同じ行にある\nデータを抽出するExcel関数である。\nしたがって、正解は(b)となる"}, {"id": "ch4_054", "no": 54, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2スプレッドシート", "question": "ExcelでAlのセルを複写する場合に、A列のみを固定する方法として、正し\nいものはどれか。", "choices": [{"key": "a", "text": "Al"}, {"key": "b", "text": "$A$1"}, {"key": "c", "text": "$Al"}, {"key": "d", "text": "A$1"}], "answer": "c", "explanation": "。\n16 ツールの活用\n16.2スプレッドシート\n正解: c\n行番号もしくは列番号を固定する際は、$記号を該当する列番号もしくは行番号の\n前に配置する。\n$A$1とすると、A列、 1行目ともに固定される絶対参照となる。$Alとすると、A\n列が固定されて絶対参照になり、 1行日は相対参照のままの複合参照(混合参照)と\nなる。A$1とすると、 1行日のみが固定される複合参照(混合参照)となる。\nしたがって、正解は(c)となる"}, {"id": "ch4_055", "no": 55, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 16.2スプレッドシート", "question": "ExcelファイルのSheetlで、Sheet2のセルAlを参照する式として、正\nしいものはどれか。", "choices": [{"key": "a", "text": "=Sheet2!Al"}, {"key": "b", "text": "=Sheet2‖ Al"}, {"key": "c", "text": "=Sheet2#Al"}, {"key": "d", "text": "=Sheet2$Al"}], "answer": "a", "explanation": "16 ツールの活用 16.2スプレッドシート\n正解: a\n数式を入力しているシート以外のシートを参照する際は、「=」を入力した後、参\n照するシートのシート見出しをクリックし、参照先のセルもしくはセル範囲をクリッ\nク(ドラッグ)すると「=シート名!セル番地」の形式で参照先が記述される。\nしたがって、正解は(a)となる"}, {"id": "ch4_056", "no": 56, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2スプレッドシート", "question": "Excelのデータの入力規則で設定できる項目に、含まれないものはどれか。", "choices": [{"key": "a", "text": "ドロップダウンリスト"}, {"key": "b", "text": "入力時メッセージ"}, {"key": "c", "text": "セルのロック"}, {"key": "d", "text": "日本語入力"}], "answer": "c", "explanation": "。\n16 ツールの活用\n16.2スプレッドシート\n正解 : c\nデータの入力規則では、 ドロップダウンリストを含む入力値の設定、選択時メッ\nセージ、エラーメッセージ、日本語入力の設定を行う。セルのロックの設定は、セル\nの書式設定で行う。\nしたがって、正解は(c)となる"}, {"id": "ch4_057", "no": 57, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2スプレッドシート", "question": "Excelのテーブルの機能として、適切でないものはどれか。", "choices": [{"key": "a", "text": "フィルターが設定される"}, {"key": "b", "text": "重複した項目名が統合される"}, {"key": "c", "text": "集計行が利用できる"}, {"key": "d", "text": "範囲が自動で拡張される"}], "answer": "b", "explanation": "16 ツールの活用\n16.2スプレッドシート\n正解: b\n表をテーブルに変換することで、フィルターが自動的に追加され、集計行が利用可\n能になる。また、データを追加した際にテーブルの範囲が自動で拡張される。1行目\nの項目名が重複する場合は「項目a」\n「項目b」\nなど適切に区別する必要があり、自動\n的に統合する機能は備わつていない。\nしたがって、正解は(b)となる"}, {"id": "ch4_058", "no": 58, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2スプ", "question": "ExcelのVLOOKUP関数を用いて製品番号を基準にして対応する製品名を抽\n出する際、検索方法に指定するものとして、適切なものはどれか。", "choices": [{"key": "a", "text": "TRUE"}, {"key": "b", "text": "FALSE"}, {"key": "c", "text": "VALUE"}, {"key": "d", "text": "NUM"}], "answer": "b", "explanation": "。\n16 ツールの活用\n16.2スプ\nッドシート\n正解: b\n製品番号が昇順に配置されている場合、検索方法にTRUEを指定もしくは省略する\nと、一致するレコードが存在しなくても近似検索が行われ、意図し怠い結果が返つて\nきてしまう。そのため、検索方法にはFALSEを指定して完全一致検索にする必要があ\nる。\nしたがって、正解は(b)となる"}, {"id": "ch4_059", "no": 59, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2スプレッドシート", "question": "Excelで水平方向の配列を垂直方向に\nして、正しいものはどれか。", "choices": [{"key": "a", "text": "INDEX関数"}, {"key": "b", "text": "XLOOKUP関数"}, {"key": "c", "text": "TRANSPOSE関数"}, {"key": "d", "text": "OFFSET関数 (もしくはその逆に)変換する関数と"}], "answer": "c", "explanation": "16 ツールの活用\n16.2スプレッドシート\n正解: c\n範囲を選択して行と列を入れ替える場合、TRANSPOSE関数を利用して、引数に配\n列を指定する。4行×6列の配列を入れ替える場合、結果が返される6行×4列を選\n択してTRANSPOSE関数を入力し、 Ctrl+Shift+Enterを押す必要がある。\nしたがって、正解は(c)となる"}, {"id": "ch4_060", "no": 60, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2スプレッドシート", "question": "VLOOKUP関数、 HLOOKUP関数の4髪糸墜として:登場したXLOOKUP関壺文(D\n仕様として、適切でないものはどれか。", "choices": [{"key": "a", "text": "検索する範囲と結果返す範囲を別に指定する"}, {"key": "b", "text": "有効な結果が見つからない場合の対応を指定できる"}, {"key": "c", "text": "一致モードが自動判別される"}, {"key": "d", "text": "末尾から先頭の方向での検索を指定できる"}], "answer": "c", "explanation": "。\n16 ツールの活用\n16.2スプレッドシート\n正解 i c\nXLOOKUP関数の引数は以下である。\n=XLOOKUP(検索値′検索範囲′戻り範囲′見つからない場合′一致モード′検索モー\nド)\n検索を行う範囲(検索範囲)と結果を返す範囲(戻り範囲)をそれぞれ別に指定す\nる形になり、結果が見つからない場合に返す値や文字列を指定できるようになった。\nさらに、検索モードを指定して末尾から検索を行うことも可能になった。一致モード\nを省略した場合は、完全一致での検索が行われ、一致モードの自動判別はされない。\nしたがって、正解は(c)となる"}, {"id": "ch4_061", "no": 61, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2スプレッドシー", "question": "Excelのテーブルもしくはピボットテーブルで、任意のフィールドに含まれ\nる項目のボタンをクリックしてフィルターを適用できる機能として、正し\nいものはどれか。", "choices": [{"key": "a", "text": "スライサー"}, {"key": "b", "text": "スパークライン"}, {"key": "c", "text": "レーダー"}, {"key": "d", "text": "リストボックス"}], "answer": "a", "explanation": "16 ツールの活用\n16.2スプレッドシー\nIE角準: a\nExcelのテーブルやピボットテーブルを利用する際、スライサーを挿入すると、任\n意のフィードの項目をボタンで表示し、クリックすることでデータを絞り込むことが\nできる。スライサーには複数のフィールドを指定でき、絞り込む条件も複数選択するこ\nとができる。\nしたがって、正解は(a)となる"}, {"id": "ch4_062", "no": 62, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2スプレッドシート", "question": "Excelのセル内に簡易的なグラフを描画できる機能として、正しいものはどれか。", "choices": [{"key": "a", "text": "スライサー"}, {"key": "b", "text": "スパークライン"}, {"key": "c", "text": "レーダー"}, {"key": "d", "text": "リストボックス"}], "answer": "b", "explanation": "。\n16 ツールの活用\n16.2スプレッドシート\n正解: b\nExcelの個々のセルの中に折れ線グラフや棒グラフを描画できる機能がスパークラ\nインである。スパークラインを用いることで、最小限のスペースで値の傾向を示した\nり、最大値や最小値を強調表示することができ、大きなデータセットに含まれるパ\nターンを簡潔に示すことができる。\nト\nしたがって、正解は(b)となる"}, {"id": "ch4_063", "no": 63, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2スプレッドシート", "question": "Excelのピボットテーブル、ピボットグラフの説明として、適切でないもの\nはどれか。", "choices": [{"key": "a", "text": "集計した値を指定した範囲でグループ化できる"}, {"key": "b", "text": "行や列に複数のフィードを指定して階層構造を形成できる"}, {"key": "c", "text": "スライサーでピボットグラフに反映するデータを絞り込むことができる"}, {"key": "d", "text": "元データが修正、追加されると、ピボットテーブル、ピボットグラフにも 自動で反映される"}], "answer": "d", "explanation": "16 ツールの活用\n16.2スプレッドシート\n正解: d\nピボットテーブル、ピボットグラフでは、集計した値を意味のある単位でグループ\n化したり、複数フィールドを階層にして集計を行うことができる。また、スライサー\nを挿入すれば、集計項目を絞り込むことができる。元データが変更された場合は、自\n動では反映されないため、手動で更新する必要がある。\nしたがって、正解は(d)となる"}, {"id": "ch4_064", "no": 64, "chapter": "第4章 財務モデリングのプロセス", "topic": "16 ツールの活用 / 16.2スプレッドシート", "question": "スプレッドシートで財務モデルを構築する際のポイントとして、適切でな\nいものはどれか。", "choices": [{"key": "a", "text": "複数のシート間で列に一貫性を持たせる"}, {"key": "b", "text": "税率などの固定値はインプットのシートに1回だけ入力する"}, {"key": "c", "text": "ICO(インプット、計算、アウトプット)は1つのシートにまとめる"}, {"key": "d", "text": "計算の順番は左から右、上から下へ配置する"}], "answer": "c", "explanation": "。\n16 ツールの活用\n16.2スプレッドシート\n正解 : c\n税率などの固定値は、インプットのシートに1回だけ直接入力し、計算を行うシー\nトではインプットのシートに入力された値を参照する。計算を行う際は、本のよう\nに、左から右、上から下に向かつて計算を行う。さらに、計算用のシートを参照して\n印刷や報告を念頭に置いたアウトプットのシートを作成する。これらのシートの列の\n構造に一貫性を持たせておけば、直接、セルを参照するだけでなく、VLOOKUP′\nXLOOKUP等の関数を用いて任意の値に対応した項目を参照することも容易になる。\nしたがって、正解は(c)となる"}, {"id": "ch5_065", "no": 65, "chapter": "第5章 財務予測の作成", "topic": "19 基本統計学 / 19.3回帰分析", "question": "売上高の過去データに対する傾向線は、×軸を時間軸とし、Y軸を売上高も\nしくは売上数量とするグラフ上に、異なる傾きと切片の組み合わせで定義\nすることができる。過去データの固まりに対して異なる傾きと切片の組み\n合わせを試す目的として、正しいものはどれか。", "choices": [{"key": "a", "text": "傾向線の中から外挿した場合に予測売上高が最大化される傾向線を見つ けるため"}, {"key": "b", "text": "過去データの実績値を検証するため"}, {"key": "c", "text": "過去データに現れているパターンが傾向線の特定のタイプに従う理由を 見つけるため"}, {"key": "d", "text": "全ての実績データに最も当てはまりの良い傾向線を見つけ、その傾向線 を外挿することにより将来のY軸の予測値を得るため"}], "answer": "d", "explanation": "19 基本統計学\n19.3回帰分析\n正解: d\n売上高の過去データに対する傾向線は、X軸を時間軸とし、Y軸を売上高もしくは\n売上数量とするグラフ上に、異なる傾きと切片の組み合わせで定義することができ\nる。過去データの固まりに対して異なる傾きと切片の組み合わせを試す目的は、「全\nての実績データに最も当てはまりの良い傾向線を見つけ、その傾向線を外挿すること\nにより将来のY軸の予測値を得るため」である。\nしたがって、正解は(d)となる"}, {"id": "ch5_066", "no": 66, "chapter": "第5章 財務予測の作成", "topic": "19 基本統計学 / 19.3回帰分析", "question": "回帰分析での線形近似で用いられる傾向線として、正しいものはどれか。", "choices": [{"key": "a", "text": "一次関数(y=ax+b)で表される直線"}, {"key": "b", "text": "二次関数で表される放物線"}, {"key": "c", "text": "指数関数で表される曲線"}, {"key": "d", "text": "対数関数で表される曲線"}], "answer": "a", "explanation": "。\n19 基本統計学\n19.3回帰分析\n正解: a\n回帰分析でよく用いられる近似方法として、線形近似がある。「線形」とは、一次\n関数を意味し、傾向線は直線である。\nしたがって、正解は(a)となる"}, {"id": "ch5_067", "no": 67, "chapter": "第5章 財務予測の作成", "topic": "19 基本統計学 / 19.3回帰分析", "question": "店舗の面積(x)と店舗の売上高(y)の関連性を分析するため、Excelの\nデータ分析機能を使い、回帰分析を行った。線形近似曲線は、y=100x\n+2′ 000となった。決定係数が十分に高いと判断できる場合に、店舗の面\n積が100の場合の店舗の売上高として、正しいものはどれか。", "choices": [{"key": "a", "text": "2′ 000"}, {"key": "b", "text": "8′ 000"}, {"key": "c", "text": "10′000"}, {"key": "d", "text": "12′ 000"}], "answer": "d", "explanation": "19 基本統計学\n19.3回帰分析\n正解: d\n線形近似の場合、 1次関数(y=ax+b)で表され、任意のx値に対して、y値が予\n測可能となる。本問では、線形近似曲線は、y=100x+2′ 000であり、x=100を代\n入すると、y=12′ 000(=100× 100+2′ 000)となる。\nしたがって、正解は(d)となる"}, {"id": "ch5_068", "no": 68, "chapter": "第5章 財務予測の作成", "topic": "23 財務諸表分析 / 23.1キャッシュ・フロー計算書", "question": "営業活動によるキャッシュ・フローを減少させる組み合わせとして、正し\nいものはどれか。\nA:棚卸資産回転期間を減少する\nB:売上債権回転期間を増加する\nC:支払債務回転期間を減少する\nD:支払債務回転期間を増加する", "choices": [{"key": "a", "text": "BとD"}, {"key": "b", "text": "BとC"}, {"key": "c", "text": "AとD"}, {"key": "d", "text": "AとC"}], "answer": "b", "explanation": "。\n23 財務諸表分析\n23.1キャッシュ・フロー計算書\n正解: b\nキャッシュ・フロー計算書は、3つの事業活動\n(営業活動、投資活動、財務活動)\nによるキャッシュ・フローから構成される。営業活動によるキャッシュ・フローの表\n示方法には、直接法と間接法の選択が認められている。営業活動に関わる資産\n(売上\n債権・棚卸資産)の増加は、キャッシュ・フローを減少させる。営業活動に関わる負\n債\n(支払債務)の増加はキャッシュ・フローを増加させる。本問では、売上債権回転\n期間の増加と支払債務回転期間の減少が、キャッシュ・フローを減少させる。\nしたがって、正解は(b)である"}, {"id": "ch5_069", "no": 69, "chapter": "第5章 財務予測の作成", "topic": "", "question": "営業活動によるキャッシュ・フローを増加させる説明として、正しいもの\nはどれか。", "choices": [{"key": "a", "text": "売掛金の増加"}, {"key": "b", "text": "買掛金の増加"}, {"key": "c", "text": "長期負債の増加"}, {"key": "d", "text": "棚卸資産の残高の維持"}], "answer": "b", "explanation": "笙__堕量菫盪逝_______IL上_主墜星堡二≡里=塾冒畳______工工」≧_\nキャッシュ・フロー計算書は、3つの事業活動(営業活動、投資活動、財務活動)\nによるキャッシュ・フローから構成される。営業活動によるキャッシュ・フローの表\n示方法には、直接法と間接法の選択が認められている。営業活動に関わる資産\n(売上\n債権・棚卸資産)の増加は、キャッシュ・フローを減少させる。営業活動に関わる負\n債(支払債務)の増加はキャッシュ・フローを増加させる。本問では、買掛金の増加\nが、キャッシュ・フローを増加させる。\nしたがって、正解は(b)である"}, {"id": "ch5_070", "no": 70, "chapter": "第5章 財務予測の作成", "topic": "23 財務諸表分析 / 23.1キャッシュ・フロ―計算書", "question": "下記のデータを基に計算されるフリー・キャッシュ・フローとして、正し\nいものはどれか。\n営業キャッシュ・フロー:860億円\n投資キャッシュ・フロー:-660億円\n財務キャッシュ・フロー:-150億円", "choices": [{"key": "a", "text": "200億円"}, {"key": "b", "text": "50億円"}, {"key": "c", "text": "510億円"}, {"key": "d", "text": "350イi雪、 Fヨ"}], "answer": "a", "explanation": "。\n23 財務諸表分析\n23.1キャッシュ・フロ―計算書\n正解: a\nキャッシュ・フロー計算書は以下の3つの部に分かれて期末現金に至る当該期間の\n動きを説明する。\n(1)営業活動によるキャッシュ・フローの部\n(2)投資活動によるキャッシュ・フローの部\n(3)財務活動によるキャッシュ・フローの部\nフリー・キャッシュ・フローは経営者にとってフリーとなるキャッシュ・フローを\n表すもので、現在の営業活動と将来に向けた投資活動を踏まえた結果であり、財務活\n動と期末現金に振り向ける原資である。\nフリー・キャッシュ・フローは営業キャッシュ・フローから投資キャッシュ・フ\n□―を差し引くことで計算される。\nしたがって、正解は(a)となる"}, {"id": "ch5_071", "no": 71, "chapter": "第5章 財務予測の作成", "topic": "23 財務諸表分析 / 23.2損益計算書", "question": "EBITDAを求める計算式として、正しいものはどれか。", "choices": [{"key": "a", "text": "売上高― 売上原価"}, {"key": "b", "text": "売上高一売上原価― 販売。一般管理費十減価償却費"}, {"key": "c", "text": "売上高― 売上原価― 販売。一般管理費― 減価償却費"}, {"key": "d", "text": "純利益+減価償却費"}], "answer": "b", "explanation": "23 財務諸表分析\n23.2損益計算書\nIE角写i b\nEBITDAとは、 Earnings Before lnterest′ 丁ax′ Depreciation and ArTlortization\nの略である。利子費用、税金費用、減価償却費を控除する前の営業利益である。グ\n□―バル企業においては、利益センターの管理者が当期にコント□―ルすることがで\nきる利益としてEBITDAが使用されることが多い。\nしたがって、正解は(b)である"}, {"id": "ch5_072", "no": 72, "chapter": "第5章 財務予測の作成", "topic": "", "question": "農業機械の製造企業C社は5つの異なる種類の機械を販売している。5つの\n種類の機械それぞれに関して、新製品販売部門と中古製品販売部門がある。\nこれらの販売部門の売掛金を予測するために知る必要があるものはどれか。", "choices": [{"key": "a", "text": "過去データに基づく各々の製品と販売部門に関する現金販売と掛販売の 比率、および企業全体の売上高予測"}, {"key": "b", "text": "過去データに基づく企業の売掛金の回転率"}, {"key": "c", "text": "各々の製品と販売部門の支払条件と売上高予測、および支払条件と製品 ミックスに関して将来に予定されている変更"}, {"key": "d", "text": "各々の製品と販売部門のキャッシュ・コンバージョン・サイクル(Cash Conversion Cycle)"}], "answer": "c", "explanation": "。\n正解: c\n売掛金を予測するための出発点は、正確な売上高予測である。本問では、各々の製\n品の売上高予測から始める。将来に予定されている製品ミックスの変更を考慮した上\nで、販売部門の現時点における支払条件、および将来に予定されている支払条件の変\n更を反映させる。\nしたがって、正解は(c)である"}, {"id": "ch5_073", "no": 73, "chapter": "第5章 財務予測の作成", "topic": "24 比率分析 / 24.1", "question": "日本企業における財務制限条項の中で最も利用頻度が高いのは「純資産維\n持」と「X」の2つである。Xに該当するものはどれか。", "choices": [{"key": "a", "text": "有利子負債関連 (例:有利子負債EBITDA倍率)"}, {"key": "b", "text": "自己資本比率"}, {"key": "c", "text": "在庫回転日数"}, {"key": "d", "text": "利益維持 (例:各決算期にっき2期連続して経常利益を赤字にしないこと)"}], "answer": "d", "explanation": "24 比率分析\n24.1\n正解: d\n財務制限条項\n(コベナンツ)は、貸付企業が借入企業に貸付契約上で課す制約であ\nる。借入企業の財務状況に大きな問題を与える状況が発生する際に、貸付企業が行動\nをとることを可能にする。財務制限条項の中で日本企業による利用頻度が最も高いの\nは、「純資産維持」と「利益維持\n(例:各決算期にっき2期連続して経常利益を赤字\nにしないこと)」の2つである。\nしたがって、正解は(d)となる"}, {"id": "ch5_074", "no": 74, "chapter": "第5章 財務予測の作成", "topic": "24_些率2重________三蟹二_=王:墨杢聾壺望塁塁型L____ェ笙=二", "question": "売上高当期純利益率が5%、\n総資本回転率が2回転、財務レバレッジが2倍\nの時、自己資本利益率は何%になるか。", "choices": [{"key": "a", "text": "0.2%"}, {"key": "b", "text": "2.0%"}, {"key": "c", "text": "20.0%"}, {"key": "d", "text": "3.8%"}], "answer": "c", "explanation": "。\n24_些率2重________三蟹二_=王:墨杢聾壺望塁塁型L____ェ笙=二\n__\n自己資本利益率は以下の3つの要素から構成される。\n(1)売上高当期純利益率\n(2)総資本回転率\n(3)財務レバレッジ\n売上高当期純利益率は最終的な利益率、総資本回転率は調達資本全体の回転率を表\nし、財務レバレッジは財務的な梃子の度合いを示している。\n自己資本利益率は株主の立場からの統合指標とも言われ、言い換えると株主の立場\nからの資本効率を総合する指標である。上記の3つの要素を掛|ナ合わせることで求め\nられる。よって計算式は以下の通り。\n0.05x2x2=0.2・・20ワ0\nしたがって、正解は(c)となる"}, {"id": "ch5_075", "no": 75, "chapter": "第5章 財務予測の作成", "topic": "24 比率分析 / 24.3収益性の分析", "question": "下記のデータを基に計算されるキャッシュ・コンバージョン・サイクルと\nして、正しいものはどれか。\n売上債権回転日数:30日\n棚卸資産回転日数:50日\n仕入債務回転日数:40日", "choices": [{"key": "a", "text": "120日"}, {"key": "b", "text": "-60日"}, {"key": "c", "text": "20日"}, {"key": "d", "text": "40日"}], "answer": "d", "explanation": "24 比率分析\n24.3収益性の分析\n正解: d\nキャッシュ・コンバージョン・サイクル(CCC:Cash Converslon Cyde)は平均\n的な運転資本の回転状況を表すもので、営業循環過程で平均的に現金から現金に至る\n時間を示している。\n構成要素は(1)売上債権回転日数、(2)棚卸資産回転日数、(3)仕入債務回\n転日数で、いずれも平均で算出されるため、結果、キャッシュ・コンバージョン・サ\nイクルも平均値となる。適用や解釈の際には、平均値という点に注意することが必要\nである。\nキャッシュ・コンバージョン・サイクルは売上債権回転日数に棚卸資産回転日数を\n足し、仕入債務回転日数を引くことで計算される。\nしたがって、正解は(d)となる"}, {"id": "ch5_076", "no": 76, "chapter": "第5章 財務予測の作成", "topic": "24 比率分析 / 24.3", "question": "下記のデータを基に計算される売上債権回転日数として、正しいものはど\nれか。\n年間売上高:1′400億円\n売上原価:750億円\n売上債権:30億円\n棚卸資産:300億円\n仕入債務:50億円", "choices": [{"key": "a", "text": "365.85日"}, {"key": "b", "text": "175日"}, {"key": "c", "text": "40.4日"}, {"key": "d", "text": "7.8日"}], "answer": "d", "explanation": "。\n24 比率分析\n24.3\nIE角準: d\n売上債権回転日数は、運転資本を構成する売上債権が平均的に何日で回収されるか\nを表すもので、特定時点\n(場合によっては平均)の売上債権に対して1日当たりと\nいつた平均の売上高を用いる。\n売上債権回転日数を計算し用いる上で重要なことは、平均的に何日かという点であ\nるが、売上債権の金額は日々変動し、売上高も日々変動する。また、製品や販売方法\nも様々であるため、それらを踏まえた平均値として理解することが必要である。\n売上債権回転日数は1日当たり売上高で売上債権を割ることで計算される。\nしたがって、正解は(d)となる"}, {"id": "ch5_077", "no": 77, "chapter": "第5章 財務予測の作成", "topic": "24 比率分析 / 24.4", "question": "当社は流動資産500、流動負債400、\n計上している。当社の流動比率を高め\nる取引として、適切なものはどれか。", "choices": [{"key": "a", "text": "棚卸資産100を掛け取引で購入"}, {"key": "b", "text": "買掛金100の現金支払"}, {"key": "c", "text": "売掛金100の現金回収"}, {"key": "d", "text": "長期借入金を短期借入金で借り換え"}], "answer": "b", "explanation": "24 比率分析\n24.4\n正解: b\n流動比率は、次の式で表される。\n流動比率=【流動資産】÷ 【流動負債】\n本問では、流動資産(500)と流動負債(400)に対して同額を減少すると、相対\n的に流動資産の割合が増加するため、流動比率は増加する。\nしたがって、正解は(b)となる"}, {"id": "ch5_078", "no": 78, "chapter": "第5章 財務予測の作成", "topic": "25 予測財務諸表の作成 25.1", "question": "「売上データを非季節化し、再び季節化された売上予測」を作成するプロ\nセスにおいて、最初のプロセスとして、適切なものはどれか。", "choices": [{"key": "a", "text": "季節性を確認する"}, {"key": "b", "text": "年度毎に平均を計算する"}, {"key": "c", "text": "年度毎に各月のインデックスを計算する"}, {"key": "d", "text": "各月の季節インデックスを標準化する"}], "answer": "a", "explanation": "。\n25 予測財務諸表の作成 25.1\nの非季節化\n正解: a\n売上高予測の定量的予測手法に「時系列分析」があり、過去データを検討すること\nにより、基本的な関係を識別する。時系列データには、「長期トレンド」、「周期的\n変動」、「季節変動」、「不規則な変動」の4つの要素がある。季節変動とは、年間\nにおける季節の変化に応じて月毎に定期的に繰り返される予測可能な変動である。売\n上高予測の作成において、季節変動の影響を売上高予測に反映させる7つのステップ\nの最初のステップは季節性を確認することである。\nしたがって、正解は(a)となる"}, {"id": "ch5_079", "no": 79, "chapter": "第5章 財務予測の作成", "topic": "25 予測財務諸表の作成 25.2売", "question": "財務諸表予測を作成するプロセスには、フつの主要なステップがある。最\n初のステップとして、正しいものはどれか。", "choices": [{"key": "a", "text": "資本支出を予測する"}, {"key": "b", "text": "法人税を計算する"}, {"key": "c", "text": "資金調達のニーズを決定する"}, {"key": "d", "text": "売上高を予測する"}], "answer": "d", "explanation": "25 予測財務諸表の作成 25.2売\n上高予算と売上高予測\n正解: d\n財務諸表予測を作成するプロセスには、フつの主要なステップがある。最初のス\nテップは売上高を予測するである。グローバル企業において月次会議のために作成さ\nれる財務諸表予測は、売上高予測と売上総利益予測の作成と是正措置の提案に殆どの\n時間が費やされる。\nしたがって、正解は(d)となる"}, {"id": "ch5_080", "no": 80, "chapter": "第5章 財務予測の作成", "topic": "25 予測財務諸表の作成 25,2", "question": "損益計算書が財務諸表予測の論理的な出発点になる理由として、適切なも\nのはどれか。", "choices": [{"key": "a", "text": "損益計算書は作成が容易だから"}, {"key": "b", "text": "損益計算書が最も信頼性が高い予測だから"}, {"key": "c", "text": "損益計算書は組織の売上高を産み出す活動を説明するから"}, {"key": "d", "text": "損益計算書は最も直近のデータを使用するから"}], "answer": "c", "explanation": "。\n25 予測財務諸表の作成 25,2\n算と売上高予測\n正解: c\n損益計算書が財務諸表予測の論理的な出発点になる理由は、損益計算書は組織の売\n上高に始まり、組織の売上高を産み出す活動を説明するからである。\nしたがって、正解は(c)となる"}, {"id": "ch5_081", "no": 81, "chapter": "第5章 財務予測の作成", "topic": "25 予測財務諸表の作成 25.2売上", "question": "時系列分析の基本的な仮定として、適切なものはどれか。", "choices": [{"key": "a", "text": "過去の一定の月数における売上高実績値に関するデータは、将来の同じ 月数の売上高に関する正確な予測を提供することができる"}, {"key": "b", "text": "現在の、もしくは差し迫つた将来の外部市場の状況は、過去における売 上高のパターンを説明できる"}, {"key": "c", "text": "将来における売上高の水準は、過去における売上高のパターンを外挿す る(extrapo!ate)ことにより推定できる"}, {"key": "d", "text": "従属変数と独立変数の相関関係を識別することによって、将来の売上高 の水準の予測が可能になる"}], "answer": "c", "explanation": "25 予測財務諸表の作成 25.2売上\n正解 i c\n「時系列分析」は、売上高予測の定量的予測手法である。定量的予測手法の前提\nは、歴史的に有効であった基本的なパターンおよび関係は継続するであろうというこ\nとである。定量的予測手法には、過去データを使用する時系列分析と結合データを使\n用する回帰分析の2つがある。時系列分析の基本的な仮定は、「将来における売上高\nの水準は、過去における売上高のパターンを外挿することにより推定できる」であ\nる。\nしたがって、正解は(c)となる"}, {"id": "ch5_082", "no": 82, "chapter": "第5章 財務予測の作成", "topic": "26 予測手法 / 26.1", "question": "数年間もしくは10年間単位の時間軸で異なる周期および異なる影響の大き\nさで繰り返す傾向を有しているものとして、正しいものはどれか。", "choices": [{"key": "a", "text": "長期トレンド(Secular丁にnd)"}, {"key": "b", "text": "周期的変動 (Cyc‖ cal Variation)"}, {"key": "c", "text": "季節変動 (Seasona!Variation)"}, {"key": "d", "text": "不規貝」な変動 (Irregular Variation)"}], "answer": "b", "explanation": "。\n26 予測手法\n26.1\nの要素\n正解: b\n69-A\n売上高予測の定量的予測手法に「時系列分析」があり、過去データを検討すること\nにより、基本的な関係を識別する。時系列データには、「長期トレンド」、「周期的\n変動」、「季節変動」、「不規則な変動」の4つの要素がある。周期的変動とは、数\n年間もしくは10年間単位の時間軸で異なる周期および異なる影響の大きさで繰り返\nす傾向である。\nしたがって、正解は(b)となる"}, {"id": "ch5_083", "no": 83, "chapter": "第5章 財務予測の作成", "topic": "26 予測手法 / 26.2定性的手法", "question": "「売上高予測の定性的手法」の中で「企業内部の支配的な個性を持つ1人\nの幹部が複数の幹部の意見が一致する方向に過度な影響を及ぼすことを防\nぐために、複数の幹部のそれぞれの意見が聴取された段階で、彼らの意見\nをグループの意見として要約し、意見の一致に至るまでプロセスを繰り返\nす」手法として、適切なものはどれか。", "choices": [{"key": "a", "text": "環境のモニタリング"}, {"key": "b", "text": "複数の幹部の意見"}, {"key": "c", "text": "複数の営業幹部による予測の集計"}, {"key": "d", "text": "デルファイ法"}], "answer": "d", "explanation": "26 予測手法\n26.2定性的手法\n正解: d\n「売上高予測の定性的手法」の中で「企業内部の支配的な個性を持つ1人の幹部が\n複数の幹部の意見が一致する方向に過度な影響を及ぼすことを防ぐために、複数の幹\n部のそれぞれの意見が聴取された段階で、彼らの意見をグループの意見として要約\nし、意見の一致に至るまでプロセスを繰り返す」手法は、デルファイ法である。\nしたがって、正解は(d)となる"}, {"id": "ch6_084", "no": 84, "chapter": "第6章 投資決定のプロセス", "topic": "27 CF予測 / 27.1キャッシュ・フロー予測の特徴", "question": "投資決定のプロセス(Capital Budgeting)において、最初に行うこととし\nて、適切なものはどれか。", "choices": [{"key": "a", "text": "投資プロジェクトの目的が戦略に合致するように調整する"}, {"key": "b", "text": "複数の仮定を設定する"}, {"key": "c", "text": "投資プロジェクトのキャッシュ・フローを予測する"}, {"key": "d", "text": "選定した評価法を適用し、リスクを分析する"}], "answer": "a", "explanation": "27 CF予測\n27.1キャッシュ・フロー予測の特徴 \n正解:a\n投資決定のプロセス(Capital Budgeting)は、キャッシュ・フローのリターンが\n投資時点から1年の期間を超えて発生する投資プロジェクトを識別し、分析し、選択\nするプロセスである。資本予算で承認された予算金額枠の枠内で実行できることを前\n提に、投資決定のプロセスは実施される。投資決定のプロセスにおいて最初に行うこ\nとは、企業の戦略と方向性が一致している投資プロジェクトに関する提案を作成する\nことである。\nしたがって、正解は(a)となる"}, {"id": "ch6_085", "no": 85, "chapter": "第6章 投資決定のプロセス", "topic": "27 CF予測", "question": "投資決定のプロセス(Capital Budgeting)において予測するキャッシュ・\nフローは、関連性のある(Relevant)キャッシュ・フローでなければなら\nない。関連性のあるキヤツシユ・フローの予測において、適切でないもの\nはどれか。", "choices": [{"key": "a", "text": "「埋没原価(Sunk Cost)」 を無視する"}, {"key": "b", "text": "「オ幾会漏訂面(Oppotunity Cost)」 を≦〕こ)る"}, {"key": "c", "text": "投資プロジェクトによって発生する「運転資本(Working Capital)の 増加・減少」を含める"}, {"key": "d", "text": "「インフレーション(Inflation)の影響」はキャッシュ・フローに反映 させない"}], "answer": "d", "explanation": "。\n27 CF予測\n関連性のあるキャッシュ・フローを予測するには、予測キャッシュ・フローから埋\n没原価を無視し、機会原価を含め、投資プロジェクトによって発生する運転資本\n(売\n掛金、棚卸資産、買掛金)の増加・減少を含め、インフレーシ∃ンの影響を反映さ\nせることが必要である。\nしたがって、正解は(d)となる"}, {"id": "ch6_086", "no": 86, "chapter": "第6章 投資決定のプロセス", "topic": "27 CFF子 / 27.2予測プロセス", "question": "投資プロジェクトのキャッシュ・フローに影響を及ぼさないものとして、\n正しいものはどれか。", "choices": [{"key": "a", "text": "加速された減価償却"}, {"key": "b", "text": "残存価値"}, {"key": "c", "text": "法人税率の変更"}, {"key": "d", "text": "投資プロジェクトのための資金調達手段の変更"}], "answer": "d", "explanation": "27 CFF子\n'沢」\n27.2予測プロセス\n正解: d\n投資プロジェクトの評価において、「関連性のあるキャッシュ・フロー」の要件の\n1つは、「営業活動に関するキャッシュ・フロー」であり、「資金調達活動に関する\nキャッシュ・フロー」ではないということである。設問の選択肢の中で投資プロジェ\nクトの予測キャッシュ・フローに影響を及ぼさないものは、投資プロジェクトのため\nの資金調達手段の変更である。\nしたがって、正解は(d)となる"}, {"id": "ch6_087", "no": 87, "chapter": "第6章 投資決定のプロセス", "topic": "28 企業財務 / 28.l CAPM", "question": "トータル・リスク\n(Total Risk)は、システマテイック・リスク(Systematic\nRisk)とアンシステマティック・リスク\n(Unsystematic Risk)の合計で\nある。アンシステマテイック・リスクの特徴に、該当しないものはどれか。", "choices": [{"key": "a", "text": "特定の企業や業界にのみ影響を与える要因"}, {"key": "b", "text": "「市場全体のポートフォリオの期待収益率の変化」によって説明するこ とができない投資ポートフォリオの期待収益率の変動"}, {"key": "c", "text": "国家の経済の変化や議会による税制改革、戦争、災害、自然環境の変化 などの要因"}, {"key": "d", "text": "企業の経営幹部の死去や政府向けの大きな商談の失敗"}], "answer": "c", "explanation": "。\n28 企業財務\n28.l CAPM\n正解 : c\nシステマティック・リスクは、市場全体のポートフォリオの期待収益率の変化に反\n応した投資ポートフォリオの期待収益率の変動である。国家の経済の変化や議会によ\nる税制改革、戦争、災害、自然環境の変化などの要因である。アンシステマテイッ\nク・リスクとは、市場全体のポートフォリオの期待収益率の変化によって説明するこ\nとができない投資ポートフォリオの期待収益率の変化である。投資ポートフォリオに\n含まれる有価証券の数を増やすことによって回避することができる。例えば、企業の\n経営幹部の死去や政府向けの大きな商談の失敗が含まれる。\nしたがって、正解は(c)となる"}, {"id": "ch6_088", "no": 88, "chapter": "第6章 投資決定のプロセス", "topic": "28 企業財務 / 28,l CAPM", "question": "CAPMに関連した「ベータ\n(β )」\nとは、「システマテイック・リスクの\n指標」である。ベータに関する記述として、適切でないものはどれか。", "choices": [{"key": "a", "text": "ベータ (β)は、「市場ポートフォリオの期待収益率の変化」に対す る、「証券の期待収益率の感度(Sensitivity)」を測る"}, {"key": "b", "text": "証券ポートフォリオのベータ (β)は、証券ポートフォリオを構成す る証券のベータ (β)の加重平均である"}, {"key": "c", "text": "ベータ (β)は、特性線(Characteristic Line)の傾きである"}, {"key": "d", "text": "証券のベータ (β)>1の場合、市場ポートフォリオに較べて防御的 である"}], "answer": "d", "explanation": "28 企業財務\n28,l CAPM\n正解: d\nCAPMに関連した「ベータ\n(β )」\nとは、「システマテイック・リスクの指標」で\nある。ベータ\n(β)は、「特性線(Characteristic Line)」\nの傾きであり、「市場\nポートフォリオの超過収益率」の変化に対する「有価証券の超過収益率」の感度を測\nる。\n有価証券のベータ\n(β)>1の場合、市場ポートフォリオに較べて攻撃的である。\n有価証券のベータ\n(β)く1の場合、市場ポートフォリオに較べて防禦的である。\nしたがって、正解は(d)となる"}, {"id": "ch6_089", "no": 89, "chapter": "第6章 投資決定のプロセス", "topic": "28 企業財務 / 28.l CAPM", "question": "資本資産評価モデル(CAPM)を用いて、A社の普通株式の期待収益率\n(町)を算出しなさい。\nリスクフリーレート(RO :1.0%\n市場ポートフォリオの期待収益率(Rm)\nA社証券のベータ\n(β):1.2\n5.0%", "choices": [{"key": "a", "text": "4.8%"}, {"key": "b", "text": "5.8%"}, {"key": "c", "text": "6.2%"}, {"key": "d", "text": "7.0%"}], "answer": "b", "explanation": "。\n28 企業財務\n28.l CAPM\n正解: b\nCAPMの計算式は、Ri=Rf+β × (Rm― Rf)である。与えられた数値を当てはめる\nと以下の通り。\nRi=1.0%+1.2× (5,0%-1.0%)=5.8%\nしたがって、正解は(b)となる"}, {"id": "ch6_090", "no": 90, "chapter": "第6章 投資決定のプロセス", "topic": "28 企業財務 / 28,3資本コスト", "question": "企業の期待収益率(Required Rate of Return)の定義として、正しいもの\nはどれか。", "choices": [{"key": "a", "text": "成長機会における、再投資の収益に関する合意された比率"}, {"key": "b", "text": "投資された資本に関する、受け入れることができる最低限の収益率"}, {"key": "c", "text": "投資家に還元される最低限の利益の比率"}, {"key": "d", "text": "投資プロジェクトの売上高とコストの割合"}], "answer": "b", "explanation": "28 企業財務\n28,3資本コスト\n正解: b\n「資本コスト(Cost of Capital)」\nとは、様々な種類の資金調達手段に関して「投\n資家が要求する期待収益率」である。 企業の期待収益率(Required Rate of\nReturn)の定義は、投資された資本に関する、受け入れることができる最低限の収\n益率 (MinimurTl Acceptable Rate of Return on lnvested Capital)である。 企業\nが投資プロジェクトを実施しても企業の発行する普通株式の市場価格を変化させない\n収益率である。\nしたがって、正解は(b)となる"}, {"id": "ch6_091", "no": 91, "chapter": "第6章 投資決定のプロセス", "topic": "28 企業財務 / 28.3資本コスト", "question": "A社の加重平均資本コスト(WACC)を計算しなさい。\n他人資本:40億円\n自己資本:60億円\n借入金利:10%\n株主資本コスト:12%\n法人税率:30%", "choices": [{"key": "a", "text": "9.0%"}, {"key": "b", "text": "6.6%"}, {"key": "c", "text": "10.0%"}, {"key": "d", "text": "12.0%"}], "answer": "c", "explanation": "。\n28 企業財務\n28.3資本コスト\n正解 : c\n加重平均資本コスト(WACC)の計算式は以下の通り。\n(株主資本コスト×株主資本の割合)+(他人資本コスト×他人資本の割合)\nまた、他人資本コストの計算式は以下の通り。\n借入金利× (100%― 法人税率)\nよって、A社の加重平均資本コスト(WACC)は次のように求めることができる。\n(12%× 60億円÷ (40億円+60億円))十\n(10%X(100%-30%)×\n40億円÷ (40億円+60億円))=10,0%\nしたがって、正解は(c)となる"}, {"id": "ch6_092", "no": 92, "chapter": "第6章 投資決定のプロセス", "topic": "28 企業財務 / 28.4", "question": "1年後に100の現金を受け取り、2年後に200の現金を受け取るキャッシュ・\nフローとする。割引率を10%とした場合の現在価値として、正しいものはど\nれか。ただし、現価係数は1年後:0.91、\n2年後:0.83として計算しなさい。", "choices": [{"key": "a", "text": "300"}, {"key": "b", "text": "273"}, {"key": "c", "text": "257"}, {"key": "d", "text": "249"}], "answer": "c", "explanation": "28 企業財務\n28.4\n正解 : c\n現在価値を求める問題。ここでは現価係数は与えられているので、\n1イ華\n|[ヨ:100× 0,91=91\n2年目:200× 0.83=166\nとなり、合計257(=91+166)となる。\nしたがって、正解は(c)となる"}, {"id": "ch6_093", "no": 93, "chapter": "第6章 投資決定のプロセス", "topic": "29 投資プロジェクト評価 29,1回収期間法(Pavback)", "question": "回収期間法(Payback)を用いて、以下の投資プロジェクトの回収期間を\n求めなさい。\n年度0\n年度1\n年度2\n年度3\n年度4\n年度5\n年度6", "choices": [{"key": "a", "text": "3年"}, {"key": "b", "text": "3.5年"}, {"key": "c", "text": "4年"}, {"key": "d", "text": "4.5年 ▲10′ 000 +4′000 +3′ 000 +2′ 000 +2′000 +2′000 +1′000"}], "answer": "b", "explanation": "。\n29 投資プロジェクト評価 29,1回収期間法(Pavback)\n正解: b\n回収期間法(Payback)は、投資プロジェクトの予測キャッシュ・フローの累積額\nが投資プロジェクトの開始時点での現金支出と等しくなるために必要な期間である。\n年度3での累積キャッシュ・フローは+9′ 000となり、年度4での累積キャッ\nシユ・フローは+11′ 000となり、当初現金支出(▲10′ 000)を上回る。回収期間法\n(Payback)は、3.5年となる。\nしたがって、正解は(b)となる"}, {"id": "ch6_094", "no": 94, "chapter": "第6章 投資決定のプロセス", "topic": "29 投資プロジェクト評価 / 29.1回収期間法(Payback)", "question": "割引回収期間法(Discounted Payback)を用いて、以下の投資プロジェクト\nの割引回収期間を求めなさい。ただし、現価係数は、年度1:0.9、\n年度2:0.8、\n年度3:0,7、\n年度4:0.6、\n年度5:0.5として計算しなさい。\n年度0\n年度1\n年度2\n年度3\n年度4\n年度5\n▲3′ 000\n+1′000\n+1′000\n+1′000\n+1′000\n+1′000", "choices": [{"key": "a", "text": "3年"}, {"key": "b", "text": "3.5年"}, {"key": "c", "text": "4年"}, {"key": "d", "text": "4.5年"}], "answer": "c", "explanation": "29 投資プロジェクト評価\n29.1回収期間法(Payback)\nIE角準 i c\n割引回収期間法(Discounted Payback)は、投資プロジェクトの割引予測キャッ\nシュ・フロー累積額\n(現在価値)が投資プロジェクトの開始時点での現金支出と等し\nくなるために必要な期間である。\n与えられた現価係数に基づき、割引後のキャッシュ・フローを算出すると、年度\n1:+900、\n年度2:+800、\n年度3:+700、\n年度4:+600となり、年度4まで\nの割引累積キャッシュ・フローは+3′ 000となり、当初現金支出\n(▲3′ 000)と一致\nする。この結果、書」引回収期間法(Discounted Payback)は4年となる。\nしたがって、正解は(c)となる"}, {"id": "ch6_095", "no": 95, "chapter": "第6章 投資決定のプロセス", "topic": "29 投資プロジェクト評価 29,2収益性指標法", "question": "自社の投資プロジェクトの決定を自社の今期の設備投資予算枠の制約の中\nで行う必要がある場合、投資プロジェクトの決定において検討すべき選択\n肢として、適切なものはどれか。", "choices": [{"key": "a", "text": "IE口味:現在イ面値 (Net Present Value)"}, {"key": "b", "text": "回」又期間 (Payback Period)"}, {"key": "c", "text": "内音F利回り (IRR)"}, {"key": "d", "text": "収益性指標 (P「o債ability lndex)"}], "answer": "d", "explanation": "。\n29 投資プロジェクト評価 29,2収益性指標法\n(PI)\n正解: d\n「収益性指標(PI:Profitab‖ ty lndex)」\nは、投資プロジェクトの「予測キャッ\nシュ・フローの現在価値」の投資プロジェクトの「開始時点での現金支出\n(Initial\nCash Outlay)」\nに対する比率である。\n収益性指標の良い点は、「一定期間に投資できる額に制約があって、複数の投資プ\nロジェクト間で資本割り当てを行う場合(Capital Rationing)に、 異なる大きさの\n投資プロジェクトを比較することが可能になること」である。\nしたがって、正解は(d)となる"}, {"id": "ch6_096", "no": 96, "chapter": "第6章 投資決定のプロセス", "topic": "29 投資プロジェクト評価 29.3", "question": "正味現在価値法(NP∨)の良い点に、該当しないものはどれか。", "choices": [{"key": "a", "text": "「時間価値(Time Value of Money)」 が考慮されている"}, {"key": "b", "text": "投資プロジェクトのキャッシュ・フローが期待収益率(Required Rate of Return)で再投資されると仮定されている"}, {"key": "c", "text": "「予測キャッシュ・フローの全て」が考慮されている"}, {"key": "d", "text": "投資プロジェクトのキャッシュ・フローが、内部収益率(IRR)で再投資 されると仮定されている"}], "answer": "d", "explanation": "る\n29 投資プロジェクト評価 29.3\n(NPV)\n正解:d\n正味現在価値法(NPV)の良い点には、以下の3つがある。\n(1)「時間価値(Time Value of Money)」\nが考慮されている\n(2)投資プロジェクトのキャッシュ・フローが期待収益率(Requittd Rate\nof Return)で再投資されると仮定されている\n(3)「予測キャッシュ・フローの金て」が考慮されている\nしたがって、正解は(d)となる"}, {"id": "ch6_097", "no": 97, "chapter": "第6章 投資決定のプロセス", "topic": "29 投資プロジェクト評価 29.3", "question": "当初に100を投資し、 1年後に100の現金を受け取り、2年後に200の現金\nを受け取るキャッシュ・フローであったとする。割引率を10%とした場合\nの正味現在価値を求めなさい。\nただし、現価係数は、 1年後:0.91、\n2年後:0.83として計算しなさい。", "choices": [{"key": "a", "text": "200"}, {"key": "b", "text": "173"}, {"key": "c", "text": "157"}, {"key": "d", "text": "149 フ9-Q"}], "answer": "c", "explanation": "。\nなお、(d)は内部収益率法(IRR:Internal Rate of Return)の欠点の1つであ\n29 投資プロジェクト評価 29.3\n(NPV)\n正解 : c\n正味現在価値を求める問題。ここでは現価係数は与えられているので、\n1年目:100× 0.91=91\n2年目:200 x O.83=166\nとなり、当初投資▲100を考慮すると、合計157(=▲100+91+166)となる。\nしたがって、正解は(c)となる"}, {"id": "ch6_098", "no": 98, "chapter": "第6章 投資決定のプロセス", "topic": "29 投資プロジェクト評価 29.4内部収益率法(IRR)", "question": "投資プロジェクトXの可否を検討している。プロジェクト×のキャッシュ・\nフローを基に、当てはめる割引率を変化させたところ、割引率7%では正\n味現在価値はプラスであったが、害」引率8%にした場合には正味現在価値\nがマイナスになった。プロジェクトXの内部収益率(IRR)にっいて、正し\nいものはどれか。", "choices": [{"key": "a", "text": "プロジェクトXのIRRは、7%未満である"}, {"key": "b", "text": "プロジェクトXのIRRは、7%以上8%未満である"}, {"key": "c", "text": "プロジェクトXのIRRは、8%以上である"}, {"key": "d", "text": "プロジェクト×のIRRは、存在しない"}], "answer": "b", "explanation": "29 投資プロジェクト評価 29.4内部収益率法(IRR)\n正解: b\n内部収益率(IRR)は、プロジェクトの正味現在価値がゼロになる割引率である。\n本問では、正味現在価値がゼロになる割引率は、フ%と8%の間である。\nしたがって、正解は(b)となる"}, {"id": "ch6_099", "no": 99, "chapter": "第6章 投資決定のプロセス", "topic": "30 投資リスク分析 30.2シ", "question": "シミュレーシ∃ン分析が基づいているものとして、正しいものはどれか。", "choices": [{"key": "a", "text": "4勿言吾"}, {"key": "b", "text": "比率"}, {"key": "c", "text": "確率分布"}, {"key": "d", "text": "不確実性・影響マトリックスのデータ"}], "answer": "c", "explanation": "。\n30 投資リスク分析 30.2シ\nミュレーシ∃ン分析\n正解: c\nシミュレーション分析では、投資プロジェクトがもたらすキャッシュ・フローを、\nどのような値をとるかの確率が決まつている確率変数とみなす。確率変数がどのよう\nな値になるかという法則性を与えるものを、確率分布という。シミュレーシ∃ン分析\nが基づいているのは、「確率分布」である。\nしたがって、正解は(c)となる"}, {"id": "ch6_100", "no": 100, "chapter": "第6章 投資決定のプロセス", "topic": "30 投資リスク分析 / 30,3感度分析", "question": "感度分析を行う目的の説明として、適切なものはどれか。", "choices": [{"key": "a", "text": "1つの変数の変化が、どのようにWhat If に関する質問に答えるか"}, {"key": "b", "text": "複数の変数の同時に起こる変化が、互いにどのように影響し合うか"}, {"key": "c", "text": "複数の変数の同時に起こる変化が、どのように主要な指標に影響を与え るか"}, {"key": "d", "text": "他の選択肢全てが正しい"}], "answer": "a", "explanation": "30 投資リスク分析\n30,3感度分析\n正解: a\n感度分析とは、What If分析と呼ばれる不確実性に関する分析の1つである。\nWhat Ifとは、「もし・・・が起こつたら、どうなるだろう?」という意味である。\nまず、複数の主要なインプット変数を基にアウトプットを予測するモデルを作成し、\n全てのインプット変数を予想される値で固定したケースを基本ケースとする。次に、\n複数のインプットのうち、 1つのインプット変数を変更し、その他のインプット変数\nを予想される値で固定した場合に、 1つのインプット変数の変更がモデルのアウト\nプットに与える影響を測定する。\nしたがって、正解は(a)となる"}], "chapters": ["第1章 FP&Aとは", "第2章 戦略、組織及び業界", "第3章 予算管理（計画と統制）", "第4章 財務モデリングのプロセス", "第5章 財務予測の作成", "第6章 投資決定のプロセス"]}</script>
+
+<div class="app">
+<header>
+  <div class="top">
+    <div>
+      <h1>FP&A検定 4択問題集</h1>
+      <div class="sub">経営企画スキル検定対策｜一問一答</div>
+    </div>
+    <div class="pills">
+      <div class="pill"><b id="topTotal">100</b>問</div>
+      <div class="pill">解答済 <b id="topDone">0</b></div>
+      <div class="pill">正答率 <b id="topRate">–</b></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="home" class="screen on">
+    <div class="layout">
+      <div class="card pad sticky">
+        <h2 class="title">科目をえらぶ</h2>
+        <div class="text">科目をタップして、出題範囲を選びます。解答履歴とチェックは端末内に保存されます。</div>
+        <div class="grid3" style="margin-top:12px">
+          <div class="stat"><b id="homeTotal">100</b><span>収載</span></div>
+          <div class="stat"><b id="homeDone">0</b><span>解答済</span></div>
+          <div class="stat"><b id="homeRate">–</b><span>正答率</span></div>
+        </div>
+      </div>
+      <div class="grid">
+        <button class="subject" id="goSelect">
+          <div>
+            <div class="subject-name">FP&A</div>
+            <div class="subject-desc">第1章〜第6章｜全100問｜4択式</div>
+            <div class="progress"><i id="homeBar"></i></div>
+          </div>
+          <div class="arrow">›</div>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section id="select" class="screen">
+    <div class="card">
+      <div class="head">
+        <button class="back" id="toHome">◀ 科目一覧</button>
+        <div style="text-align:right">
+          <div style="font-weight:900">FP&A</div>
+          <div class="small">解答済 <span id="selectDone">0</span>｜正答率 <span id="selectRate">–</span></div>
+        </div>
+      </div>
+      <div class="pad">
+        <h2 class="title">出題範囲</h2>
+        <div class="grid2">
+          <button class="btn" id="allChapters">すべて選択</button>
+          <button class="btn" id="clearChapters">すべて解除</button>
+        </div>
+        <div id="chapters" style="margin-top:10px"></div>
+
+        <div class="option">
+          <h3>出題順</h3>
+          <div class="segment two" data-key="order">
+            <button class="seg on" data-value="normal">順番どおり</button>
+            <button class="seg" data-value="random">ランダム</button>
+          </div>
+        </div>
+
+        <div class="option">
+          <h3>絞り込み</h3>
+          <div class="segment four" data-key="filter">
+            <button class="seg on" data-value="all">すべて</button>
+            <button class="seg" data-value="wrong">前回×</button>
+            <button class="seg" data-value="unanswered">未解答</button>
+            <button class="seg" data-value="checked">チェック済</button>
+          </div>
+        </div>
+
+        <div class="option">
+          <h3>出題数</h3>
+          <select id="count">
+            <option value="10">10問</option>
+            <option value="20" selected>20問</option>
+            <option value="30">30問</option>
+            <option value="50">50問</option>
+            <option value="100">100問</option>
+            <option value="all">対象すべて</option>
+          </select>
+        </div>
+
+        <button class="btn primary" id="start" style="width:100%;margin-top:14px">開始</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="quiz" class="screen">
+    <div class="card">
+      <div class="quiz-top">
+        <button class="back" id="endQuiz">◀ 終了</button>
+        <div class="quiz-count" id="quizCount">1 / 1</div>
+        <button class="checkbtn" id="checkBtn">チェック</button>
+      </div>
+      <div class="pad">
+        <div class="tags">
+          <span class="tag dark" id="qChapter">章</span>
+          <span class="tag" id="qTopic">論点</span>
+        </div>
+        <div class="question" id="qText"></div>
+        <div id="choices"></div>
+        <div class="answer" id="answerBox">
+          <h3 id="resultTitle"></h3>
+          <div class="small" id="answerText"></div>
+          <div id="explanation" style="margin-top:8px"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="result" class="screen">
+    <div class="card pad score">
+      <h2 class="title">─ 採点結果 ─</h2>
+      <div class="circle"><b id="scorePct">0%</b><span class="small">正答率</span></div>
+      <div class="result-stats">
+        <div><b id="scoreOk">0</b><span class="small">○</span></div>
+        <div><b id="scoreNg">0</b><span class="small">×</span></div>
+        <div><b id="scoreAll">0</b><span class="small">全</span></div>
+      </div>
+      <div class="grid">
+        <button class="btn accent" id="wrongAgain">間違えた問題をもう一度</button>
+        <button class="btn" id="sameAgain">同じ条件でもう一度</button>
+        <button class="btn primary" id="backSelect">出題範囲へ戻る</button>
+      </div>
+    </div>
+  </section>
+
+  <section id="stats" class="screen">
+    <div class="card pad">
+      <h2 class="title">成績・復習</h2>
+      <div class="grid3">
+        <div class="stat"><b id="stDone">0</b><span>解答済</span></div>
+        <div class="stat"><b id="stRate">–</b><span>正答率</span></div>
+        <div class="stat"><b id="stWrong">0</b><span>前回×</span></div>
+      </div>
+      <div id="chapterStats" class="grid" style="margin-top:12px"></div>
+
+      <details style="margin-top:12px">
+        <summary>問題一覧・検索</summary>
+        <div class="pad"><input class="search" id="search" placeholder="検索：KPI、予算、NPVなど"></div>
+        <div id="questionList"></div>
+      </details>
+      <button class="btn danger" id="reset" style="width:100%;margin-top:12px">成績をリセット</button>
+    </div>
+  </section>
+</main>
+</div>
+
+<div class="bottom" id="bottom">
+  <div class="bottom-inner">
+    <button class="btn" id="prev">前へ</button>
+    <button class="btn" id="next">次へ</button>
+    <button class="btn accent" id="nextMain">次へ</button>
+  </div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+(function(){
+"use strict";
+
+let appData;
+try {
+  appData = JSON.parse(document.getElementById("app-data").textContent);
+} catch (e) {
+  document.querySelector("main").innerHTML = '<div class="error">問題データの読み込みに失敗しました。index.htmlを再アップロードしてください。</div>';
+  return;
+}
+
+const QUESTIONS = appData.questions || [];
+const CHAPTERS = appData.chapters || [];
+const STORE_KEY = "fpa_quiz_stable_v1";
+const SET_KEY = "fpa_quiz_stable_setting_v1";
+
+let store = load(STORE_KEY, {answers:{}, checked:{}});
+let setting = load(SET_KEY, {chapters:CHAPTERS.slice(), order:"normal", filter:"all", count:"20"});
+let session = [];
+let idx = 0;
+let sessionAnswers = {};
+
+function el(id) { return document.getElementById(id); }
+function load(k, fallback) {
+  try {
+    const v = localStorage.getItem(k);
+    return v ? JSON.parse(v) : fallback;
+  } catch(e) {
+    return fallback;
+  }
+}
+function save(k, v) {
+  try {
+    localStorage.setItem(k, JSON.stringify(v));
+  } catch(e) {
+    toast("保存できない開き方です");
+  }
+}
+function saveStore() { save(STORE_KEY, store); updateStats(); }
+function saveSetting() { save(SET_KEY, setting); }
+function escapeHTML(s) {
+  return String(s == null ? "" : s).replace(/[&<>"']/g, function(m) {
+    return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m];
+  });
+}
+function toast(msg) {
+  const t = el("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(function() { t.classList.remove("show"); }, 1400);
+}
+function answer(q) { return store.answers[q.id] || null; }
+function isDone(q) { return !!answer(q); }
+function isWrong(q) {
+  const a = answer(q);
+  return !!a && !a.correct;
+}
+function isChecked(q) { return !!store.checked[q.id]; }
+function shuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+  }
+  return a;
+}
+function show(id) {
+  document.querySelectorAll(".screen").forEach(function(s) { s.classList.remove("on"); });
+  el(id).classList.add("on");
+  el("bottom").style.display = id === "quiz" ? "block" : "none";
+  if (id === "stats") {
+    renderStats();
+    renderList();
+  }
+}
+
+el("goSelect").addEventListener("click", function() { renderSelect(); show("select"); });
+el("toHome").addEventListener("click", function() { show("home"); });
+el("endQuiz").addEventListener("click", function() { renderSelect(); show("select"); });
+
+function renderSelect() {
+  el("count").value = setting.count;
+  const box = el("chapters");
+  box.innerHTML = "";
+  CHAPTERS.forEach(function(ch) {
+    const qs = QUESTIONS.filter(function(q) { return q.chapter === ch; });
+    const doneCount = qs.filter(isDone).length;
+    const row = document.createElement("label");
+    row.className = "check-row";
+    row.innerHTML =
+      '<input type="checkbox" ' + (setting.chapters.indexOf(ch) >= 0 ? "checked" : "") + '>' +
+      '<div><b>' + escapeHTML(ch) + '</b><div class="small">' + qs.length + '問</div></div>' +
+      '<span class="badge">' + doneCount + '/' + qs.length + '</span>';
+    row.querySelector("input").addEventListener("change", function(e) {
+      if (e.target.checked && setting.chapters.indexOf(ch) < 0) setting.chapters.push(ch);
+      if (!e.target.checked) setting.chapters = setting.chapters.filter(function(x) { return x !== ch; });
+      saveSetting();
+      renderSelect();
+    });
+    box.appendChild(row);
+  });
+
+  document.querySelectorAll("[data-key]").forEach(function(group) {
+    const key = group.getAttribute("data-key");
+    group.querySelectorAll(".seg").forEach(function(btn) {
+      btn.classList.toggle("on", setting[key] === btn.getAttribute("data-value"));
+    });
+  });
+  updateStats();
+}
+
+document.querySelectorAll("[data-key]").forEach(function(group) {
+  group.addEventListener("click", function(e) {
+    const btn = e.target.closest(".seg");
+    if (!btn) return;
+    const key = group.getAttribute("data-key");
+    setting[key] = btn.getAttribute("data-value");
+    saveSetting();
+    renderSelect();
+  });
+});
+
+el("allChapters").addEventListener("click", function() {
+  setting.chapters = CHAPTERS.slice();
+  saveSetting();
+  renderSelect();
+});
+el("clearChapters").addEventListener("click", function() {
+  setting.chapters = [];
+  saveSetting();
+  renderSelect();
+});
+el("count").addEventListener("change", function(e) {
+  setting.count = e.target.value;
+  saveSetting();
+});
+
+function buildSession() {
+  let arr = QUESTIONS.filter(function(q) { return setting.chapters.indexOf(q.chapter) >= 0; });
+  if (setting.filter === "wrong") arr = arr.filter(isWrong);
+  if (setting.filter === "unanswered") arr = arr.filter(function(q) { return !isDone(q); });
+  if (setting.filter === "checked") arr = arr.filter(isChecked);
+  if (setting.order === "random") arr = shuffle(arr);
+  else arr = arr.slice().sort(function(a,b) { return a.no - b.no; });
+  const n = setting.count === "all" ? arr.length : Math.min(Number(setting.count), arr.length);
+  return arr.slice(0, n);
+}
+
+el("start").addEventListener("click", function() {
+  session = buildSession();
+  if (!session.length) {
+    toast("対象の問題がありません");
+    return;
+  }
+  idx = 0;
+  sessionAnswers = {};
+  renderQuestion();
+  show("quiz");
+});
+
+function currentQuestion() { return session[idx]; }
+
+function renderQuestion() {
+  const q = currentQuestion();
+  if (!q) return;
+  el("quizCount").textContent = (idx + 1) + " / " + session.length;
+  el("qChapter").textContent = q.chapter;
+  el("qTopic").textContent = q.topic || "論点";
+  el("qText").textContent = q.question;
+  el("checkBtn").textContent = isChecked(q) ? "チェック済" : "チェック";
+  el("choices").innerHTML = "";
+
+  q.choices.forEach(function(c) {
+    const btn = document.createElement("button");
+    btn.className = "choice";
+    btn.setAttribute("data-key", c.key);
+    btn.innerHTML = '<span class="key">' + escapeHTML(c.key) + '</span><span>' + escapeHTML(c.text) + '</span>';
+    btn.addEventListener("click", function() { choose(c.key); });
+    el("choices").appendChild(btn);
+  });
+
+  el("answerBox").classList.remove("show");
+  const old = sessionAnswers[q.id] || answer(q);
+  if (old) reveal(old.selected);
+
+  el("prev").disabled = idx === 0;
+  el("next").disabled = idx >= session.length - 1;
+  el("nextMain").textContent = idx >= session.length - 1 ? "採点結果へ" : "次へ";
+}
+
+function choose(key) {
+  const q = currentQuestion();
+  const ok = key === q.answer;
+  const rec = {selected:key, correct:ok, time:Date.now()};
+  sessionAnswers[q.id] = rec;
+  store.answers[q.id] = rec;
+  saveStore();
+  reveal(key);
+  toast(ok ? "正解" : "不正解");
+}
+
+function reveal(key) {
+  const q = currentQuestion();
+  document.querySelectorAll(".choice").forEach(function(btn) {
+    const k = btn.getAttribute("data-key");
+    btn.disabled = true;
+    if (k === q.answer) btn.classList.add("correct");
+    if (k === key && key !== q.answer) btn.classList.add("wrong");
+  });
+  const ok = key === q.answer;
+  el("resultTitle").textContent = ok ? "○ 正解" : "× 不正解";
+  el("resultTitle").className = ok ? "ok" : "ng";
+  const correctChoice = q.choices.find(function(c) { return c.key === q.answer; });
+  el("answerText").textContent = "正解：" + q.answer + "　" + (correctChoice ? correctChoice.text : "");
+  el("explanation").textContent = q.explanation || "";
+  el("answerBox").classList.add("show");
+}
+
+el("checkBtn").addEventListener("click", function() {
+  const q = currentQuestion();
+  if (!q) return;
+  if (store.checked[q.id]) delete store.checked[q.id];
+  else store.checked[q.id] = true;
+  saveStore();
+  renderQuestion();
+});
+
+function nextQuestion() {
+  if (idx >= session.length - 1) renderResult();
+  else {
+    idx += 1;
+    renderQuestion();
+  }
+}
+el("next").addEventListener("click", nextQuestion);
+el("nextMain").addEventListener("click", nextQuestion);
+el("prev").addEventListener("click", function() {
+  if (idx > 0) {
+    idx -= 1;
+    renderQuestion();
+  }
+});
+
+function renderResult() {
+  let ok = 0;
+  let ng = 0;
+  session.forEach(function(q) {
+    const a = sessionAnswers[q.id] || answer(q);
+    if (a && a.correct) ok += 1;
+    else ng += 1;
+  });
+  const pct = session.length ? Math.round(ok / session.length * 100) : 0;
+  el("scorePct").textContent = pct + "%";
+  el("scoreOk").textContent = ok;
+  el("scoreNg").textContent = ng;
+  el("scoreAll").textContent = session.length;
+  show("result");
+}
+
+el("wrongAgain").addEventListener("click", function() {
+  const wrongs = session.filter(function(q) {
+    const a = sessionAnswers[q.id] || answer(q);
+    return a && !a.correct;
+  });
+  if (!wrongs.length) {
+    toast("間違えた問題はありません");
+    return;
+  }
+  session = wrongs;
+  idx = 0;
+  sessionAnswers = {};
+  renderQuestion();
+  show("quiz");
+});
+el("sameAgain").addEventListener("click", function() {
+  session = buildSession();
+  idx = 0;
+  sessionAnswers = {};
+  renderQuestion();
+  show("quiz");
+});
+el("backSelect").addEventListener("click", function() {
+  renderSelect();
+  show("select");
+});
+
+function updateStats() {
+  const total = QUESTIONS.length;
+  const doneCount = QUESTIONS.filter(isDone).length;
+  const correct = QUESTIONS.filter(function(q) {
+    const a = answer(q);
+    return a && a.correct;
+  }).length;
+  const wrongCount = QUESTIONS.filter(isWrong).length;
+  const rate = doneCount ? Math.round(correct / doneCount * 100) + "%" : "–";
+
+  el("topTotal").textContent = total;
+  el("homeTotal").textContent = total;
+  el("topDone").textContent = doneCount;
+  el("homeDone").textContent = doneCount;
+  el("selectDone").textContent = doneCount;
+  el("topRate").textContent = rate;
+  el("homeRate").textContent = rate;
+  el("selectRate").textContent = rate;
+  el("homeBar").style.width = Math.round(doneCount / total * 100) + "%";
+
+  if (el("stDone")) el("stDone").textContent = doneCount;
+  if (el("stRate")) el("stRate").textContent = rate;
+  if (el("stWrong")) el("stWrong").textContent = wrongCount;
+}
+
+function renderStats() {
+  updateStats();
+  const box = el("chapterStats");
+  box.innerHTML = "";
+  CHAPTERS.forEach(function(ch) {
+    const qs = QUESTIONS.filter(function(q) { return q.chapter === ch; });
+    const doneCount = qs.filter(isDone).length;
+    const correct = qs.filter(function(q) {
+      const a = answer(q);
+      return a && a.correct;
+    }).length;
+    const rate = doneCount ? Math.round(correct / doneCount * 100) + "%" : "–";
+    const div = document.createElement("div");
+    div.className = "stat";
+    div.innerHTML =
+      '<div style="display:flex;justify-content:space-between;gap:8px">' +
+      '<b style="font-size:15px">' + escapeHTML(ch) + '</b>' +
+      '<span class="small">' + doneCount + '/' + qs.length + '　' + rate + '</span></div>' +
+      '<div class="progress"><i style="width:' + Math.round(doneCount / qs.length * 100) + '%"></i></div>';
+    box.appendChild(div);
+  });
+}
+
+function renderList() {
+  const kw = (el("search").value || "").toLowerCase();
+  const box = el("questionList");
+  box.innerHTML = "";
+  QUESTIONS.filter(function(q) {
+    const choiceText = q.choices.map(function(c) { return c.text; }).join(" ");
+    const text = [q.no, q.chapter, q.topic, q.question, choiceText].join(" ").toLowerCase();
+    return !kw || text.indexOf(kw) >= 0;
+  }).forEach(function(q) {
+    const a = answer(q);
+    const cls = isChecked(q) ? "ck" : a ? (a.correct ? "ok" : "ng") : "";
+    const item = document.createElement("div");
+    item.className = "list-item";
+    item.innerHTML =
+      '<span class="dot ' + cls + '"></span>' +
+      '<div><strong>No.' + q.no + '</strong> ' + escapeHTML(q.question).slice(0,55) + (q.question.length > 55 ? "…" : "") +
+      '<div class="small">' + escapeHTML(q.chapter) + '｜' + escapeHTML(q.topic || "") + '</div></div>' +
+      '<span class="small">›</span>';
+    item.addEventListener("click", function() {
+      session = QUESTIONS.slice().sort(function(a,b) { return a.no - b.no; });
+      idx = session.findIndex(function(x) { return x.id === q.id; });
+      sessionAnswers = {};
+      renderQuestion();
+      show("quiz");
+    });
+    box.appendChild(item);
+  });
+}
+
+el("search").addEventListener("input", renderList);
+el("reset").addEventListener("click", function() {
+  if (!confirm("成績・チェックをリセットしますか？")) return;
+  store = {answers:{}, checked:{}};
+  saveStore();
+  renderStats();
+  renderSelect();
+  toast("リセットしました");
+});
+
+document.addEventListener("keydown", function(e) {
+  if (!el("quiz").classList.contains("on")) return;
+  const map = {"1":"a","2":"b","3":"c","4":"d"};
+  if (map[e.key]) choose(map[e.key]);
+  if (e.key === "Enter") nextQuestion();
+});
+
+try {
+  renderSelect();
+  updateStats();
+} catch (e) {
+  document.querySelector("main").innerHTML = '<div class="error">アプリ起動時にエラーが出ました。ファイルを再作成してください。<br>' + escapeHTML(e.message) + '</div>';
+}
+})();
+</script>
+</body>
+</html>
